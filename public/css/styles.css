@@ -1,0 +1,52 @@
+html{
+    height:100%;
+}
+:root{
+    --primary-custom: #C6A579;
+    --light-custom: #EBDCB3;
+    --danger-custom: #DB5A45;
+}
+.bg-primary-custom{
+    background-color: var(--primary-custom);
+}
+.bg-light-custom{
+    background-color: var(--light-custom);
+}
+.btn-danger-custom{
+    background-color: var(--danger-custom);
+}
+.page{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+.page__main{
+    flex-grow:1;
+}
+.header{
+    color:white;
+}
+.footer{
+    height:50px;
+}
+.phone__number{
+    font-size:18px;
+}
+.phone__icon{
+    font-size: 24px;
+}
+.phone__inner{
+    height:50px;
+}
+.navbar-brand__name{
+    font-size:20px;
+    
+}
+.navbar-brand__position{
+    font-size: 16px;
+}
+
+.facebook__icon{
+    font-size:24px;
+
+}
