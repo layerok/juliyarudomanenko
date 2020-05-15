@@ -2,8 +2,171 @@
 
 {% block title %}Home{% endblock %}
 
+{% block footer%} 
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
+{% endblock %}
+
 {% block body %}
 
-    
+    <section class="main-screen section container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="h1 mb-4">Психологическая помощь</h1>
+                <p class="mb-4">Если Вы попали на мой сайт, значит Вы в процессе поиска решения важного жизненного вызова, который называют кризисом. Я помогу разглядеть проблему со всех сторон и найти самое оптимальное решение для Вас!</p>
+                <button class="btn btn-light">Узнать больше</button>
+            </div>
+            <div class="col-lg-6 d-none d-lg-flex">
+                <img class="main-screen__img img-fluid" src="/img/abandoned-forest-industry-nature.png" alt="Рельсы в лесу">
+            </div>
+        </div>
+    </section>
+    <section class="services section container">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="h1 mb-4">Услуги</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <img src="/img/woman-talking-with-therapist_W256.png" alt="Женщина разговаривает с терапевтом" class="img-fluid">
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="h3 mb-4">Индивидуальное консультирование и психотерапия</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="properties">
+                            <div class="property d-flex align-items-center pb-2">
+                                <i class="property__icon far fa-clock"></i>
+                                <span class="property__text px-2">1 час</span>
+                            </div>
+                            <div class="property d-flex align-items-center pb-2">
+                                <i class="property__icon far fa-money-bill-alt"></i>
+                                <span class="property__text px-2">700 грн</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row pt-2">
+                    <div class="col">
+                        <button class="btn btn-light">Узнать больше</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-3">
+                <img src="/img/couple_W256.png" alt="Семейная пара" class="img-fluid">
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="h3 mb-4">Семейное консультирование и психотерапия</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="properties">
+                            <div class="property d-flex align-items-center pb-2">
+                                <i class="property__icon far fa-clock"></i>
+                                <span class="property__text px-2">1 час</span>
+                            </div>
+                            <div class="property d-flex align-items-center pb-2">
+                                <i class="property__icon far fa-money-bill-alt"></i>
+                                <span class="property__text px-2">700 грн</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row pt-2">
+                    <div class="col">
+                        <button class="btn btn-light">Узнать больше</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="comments section container">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="h1 mb-4">Комментарии</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mb-4">
+                <!-- Your embedded comments code -->
+                <div class="fb-comment-embed"
+                data-href="https://www.facebook.com/permalink.php?story_fbid=841106689701477&id=100014064605939&comment_id=842401536238659"
+                data-width="540"></div>
+            </div>
+            <div class="col mb-4">
+                <!-- Your embedded comments code -->
+                <div class="fb-comment-embed"
+                data-href="https://www.facebook.com/permalink.php?story_fbid=832324443913035&id=100014064605939&comment_id=832600490552097"
+                data-width="540"></div>
+            </div>
+            <div class="col mb-4">
+                <!-- Your embedded comments code -->
+                <div class="fb-comment-embed"
+                data-href="https://www.facebook.com/permalink.php?story_fbid=841106689701477&id=100014064605939&comment_id=842401536238659"
+                data-width="540"></div>
+            </div>
+            <div class="col mb-4">
+                <!-- Your embedded comments code -->
+                <div class="fb-comment-embed"
+                data-href="https://www.facebook.com/permalink.php?story_fbid=832324443913035&id=100014064605939&comment_id=832600490552097"
+                data-width="540"></div>
+            </div>
+        </div>
+    </section>
+    <section class="feedback section container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="h1 mb-4">Оставьте сообщение</h2>
+                <form action="#contact" method="post" >
+                    <div class="form-group">
+                      <label for="name">Имя:</label>
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Іван Іванович Іванов" 
+                      value="">
+                      
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон:</label>
+                        <input type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
+                        value="">
+                        
+                        
+                      </div>
+
+                      <div class="form-group">
+                        <label for="message">Сообщение:</label>
+                        <textarea class="form-control " name="message" id="message" placeholder="Кратко опишите вашу проблему" ></textarea>
+                    
+                      </div>
+
+                    <input type="submit" name="submit" class="btn btn-light" value="Отправить">
+                    <div class="form-group my-3">
+                        <p class="text-success text-center">
+                            
+                        </p>
+                        
+                    </div>
+                  </form>
+            </div>
+            <div class="offset-lg-2 col-lg-4">
+                
+            </div>
+
+        </div>
+    </section>
 
 {% endblock %}

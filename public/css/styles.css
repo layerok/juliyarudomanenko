@@ -1,24 +1,82 @@
 html{
     height:100%;
 }
+
+.h1{
+    font-family: 'Russo One', sans-serif;
+    font-size:32px;
+}
+.h3{
+    font-size:24px;
+}
+
+.h4{
+    font-size:13px;
+    font-weight:300;
+}
+.active{
+    color:var(--dark-custom)!important;
+}
 :root{
-    --primary-custom: #C6A579;
-    --light-custom: #EBDCB3;
-    --danger-custom: #DB5A45;
+    --lighter:#75C788;
+    --light: #6ab47b;
+    --primary:#599a68;
+    --dark: #32673f;
+    --secondary: #bdc3c7;
 }
-.bg-primary-custom{
-    background-color: var(--primary-custom);
+.bg-lighter{
+    background-color: var(--lighter)!important;
 }
-.bg-light-custom{
-    background-color: var(--light-custom);
+.bg-primary{
+    background-color: var(--primary)!important;
 }
-.btn-danger-custom{
-    background-color: var(--danger-custom);
+.bg-light{
+    background-color: var(--light)!important;
 }
+.bg-dark{
+    background-color: var(--dark)!important;
+}
+.bg-secondary{
+    background-color: var(--secondary)!important;
+}
+.btn-danger{
+    background-color: var(--danger)!important;
+}
+.border-dark{
+    border-color: var(--dark)!important;
+}
+
+.border-bottom{
+    border-bottom:5px solid var(--light)!important;
+}
+.border-primary{
+    border-color: var(--primary)!important;
+}
+.btn-light{
+    background-color: var(--light)!important;
+}
+.btn{
+    position:relative;
+    border:none;
+    border-radius:0;
+    border-bottom: 5px solid var(--primary);
+    color:#fff;
+   
+}
+.btn-light:hover{
+    border-bottom: 5px solid var(--primary);
+    color:var(--dark);
+    
+}
+.text-light{
+    color:var(--secondary)!important;
+}
+
 .page{
     height:100%;
     display:flex;
     flex-direction:column;
+    font-family:'Open Sans', sans-serif!important;
 }
 .page__main{
     flex-grow:1;
@@ -26,8 +84,24 @@ html{
 .header{
     color:white;
 }
+.section{
+    margin-top:90px;
+}
 .footer{
     height:50px;
+}
+.main-nav,
+.secondary-nav{
+    font-weight:800;
+}
+.nav-link:hover{
+    color: var(--dark)!important;
+}
+.main-nav{
+    font-size:18px;
+}
+.secondary-nav{
+    font-size:14px;
 }
 .phone__number{
     font-size:18px;
@@ -39,8 +113,7 @@ html{
     height:50px;
 }
 .navbar-brand__name{
-    font-size:20px;
-    
+    margin-bottom:0;
 }
 .navbar-brand__position{
     font-size: 16px;
@@ -50,3 +123,14 @@ html{
     font-size:24px;
 
 }
+.main-screen__img{
+    max-height:213px;
+}
+.property__icon{
+    font-size:24px;
+}
+.copyright{
+    color:var(--secondary);
+    font-size:12px;
+}
+
