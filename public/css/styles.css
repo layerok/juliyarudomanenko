@@ -1,15 +1,14 @@
 html{
     height:100%;
 }
-
 .h1{
     font-family: 'Russo One', sans-serif;
     font-size:32px;
+    color: var(--light);
 }
 .h3{
     font-size:24px;
 }
-
 .h4{
     font-size:19px;
     font-weight:700;
@@ -34,6 +33,7 @@ a{
 a:hover{
     color: var(--dark);
 }
+
 .bg-lighter{
     background-color: var(--lighter)!important;
 }
@@ -64,6 +64,7 @@ a:hover{
 }
 .btn-light{
     background-color: var(--light)!important;
+    color:#fff!important;
 }
 .btn{
     position:relative;
@@ -81,7 +82,7 @@ a:hover{
 .text-light{
     color:var(--secondary)!important;
 }
-
+/** Page **/
 .page{
     height:100%;
     display:flex;
@@ -91,21 +92,13 @@ a:hover{
 .page__main{
     flex-grow:1;
 }
+/** Header **/
 .header{
     color:white;
-}
-.section{
-    margin-top:90px;
-}
-.footer{
-    height:50px;
 }
 .main-nav,
 .secondary-nav{
     font-weight:800;
-}
-.nav-link:hover{
-    color: var(--dark)!important;
 }
 .main-nav{
     font-size:18px;
@@ -122,22 +115,32 @@ a:hover{
 .phone__inner{
     height:50px;
 }
+.nav-link:hover{
+    color: var(--dark)!important;
+}
 .navbar-brand__name{
     margin-bottom:0;
 }
 .navbar-brand__position{
     font-size: 16px;
 }
-
 .facebook__icon{
     font-size:24px;
-
 }
+.section{
+    margin-top:90px;
+}
+/** Main screen **/
 .main-screen__img{
     max-height:213px;
 }
+/** Services **/
 .property__icon{
     font-size:24px;
+}
+/** Footer **/
+.footer{
+    height:50px;
 }
 .copyright{
     color:var(--secondary);
