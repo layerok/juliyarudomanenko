@@ -11,11 +11,15 @@ html{
 }
 
 .h4{
+    font-size:19px;
+    font-weight:700;
+}
+.h5{
     font-size:13px;
     font-weight:300;
 }
 .active{
-    color:var(--dark-custom)!important;
+    color:var(--dark)!important;
 }
 :root{
     --lighter:#75C788;
@@ -23,6 +27,12 @@ html{
     --primary:#599a68;
     --dark: #32673f;
     --secondary: #bdc3c7;
+}
+a{
+    color: var(--primary)
+}
+a:hover{
+    color: var(--dark);
 }
 .bg-lighter{
     background-color: var(--lighter)!important;

@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-lg-5 col-md-6 ">
                     <nav class="nav h-100 pb-1 justify-content-end px-2">
-                        <a href="/" class="nav-link align-self-center text-white">Научные статьи</a>
-                        <a href="/" class="nav-link align-self-center text-white">Сертификаты</a>
+                        <a href="/" class="nav-link align-self-center text-white{% if page == 'science_articles' %} active {% endif %}">Научные статьи</a>
+                        <a href="/" class="nav-link align-self-center text-white{% if page == 'certificates' %} active {% endif %}">Сертификаты</a>
                     </nav>
                 </div>
                        
@@ -23,7 +23,7 @@
             <nav class="navbar navbar-expand-md navbar-dark ">
                 <a class="navbar-brand" href="/">
                     <h2 class="navbar-brand__name h1">Юлия Рудоманенко</h2>
-                    <h4 class="navbar-brand__position h4">Психолог, психотерапевт</h4>
+                    <h5 class="navbar-brand__position h5">Психолог, психотерапевт</h5>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon "></span>
@@ -31,13 +31,13 @@
               
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <nav class="navbar-nav ml-auto ">
-                    <a class="nav-link text-white active" href="/">Главная </a>
-                    <a class="nav-link text-white" href="/">Записаться</a>
-                    <a class="nav-link text-white" href="/">Обо мне</a>
-                    <a class="nav-link text-white" href="/">Блог</a>
+                    <a class="nav-link text-white{% if page == 'home' %} active {% endif %}" href="/">Главная </a>
+                    <a class="nav-link text-white{% if page == 'online_recording' %} active {% endif %}" href="/">Записаться</a>
+                    <a class="nav-link text-white{% if page == 'about' %} active {% endif %}" href="/about/index">Обо мне</a>
+                    <a class="nav-link text-white{% if page == 'blog' %} active {% endif %}" href="/">Блог</a>
                     <div class="dropdown-divider"></div>
-                    <a class="nav-link text-white d-md-none" href="/" >Научные статьи</a>
-                    <a class="nav-link text-white d-md-none" href="/" >Сертификаты</a>
+                    <a class="nav-link text-white d-md-none{% if page == 'science_articles' %} active {% endif %}" href="/" >Научные статьи</a>
+                    <a class="nav-link text-white d-md-none{% if page == 'certificates' %} active {% endif %}" href="/" >Сертификаты</a>
                   </ul>
                 </div>
               </nav>
