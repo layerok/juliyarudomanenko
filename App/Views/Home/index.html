@@ -16,14 +16,14 @@
             <div class="col-lg-6">
                 <h1 class="h1 mb-4">Психологическая помощь</h1>
                 <p class="mb-4">Если Вы попали на мой сайт, значит Вы в процессе поиска решения важного жизненного вызова, который называют кризисом. Я помогу Вам разглядеть проблему со всех сторон и найти самое оптимальное решение для Вас!</p>
-                <button class="btn btn-light">Узнать больше</button>
+                <a href="#services" class="btn btn-light">Узнать больше</a>
             </div>
             <div class="offset-lg-1 col-lg-5 d-none d-lg-flex">
                 <img class="main-screen__img img-fluid" src="/img/saving_circle_w256.png" alt="Спасательный круг">
             </div>
         </div>
     </section>
-    <section class="services section container">
+    <section id="services" class="services section container">
         <div class="row">
             <div class="col text-center">
                 <h2 class="h1 ">Услуги</h2>
@@ -41,18 +41,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 mb-4">
-                <!-- Your embedded comments code -->
-                <div class="fb-comment-embed"
-                data-href="https://www.facebook.com/permalink.php?story_fbid=841106689701477&id=100014064605939&comment_id=842401536238659"
-                data-width="540"></div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <!-- Your embedded comments code -->
-                <div class="fb-comment-embed"
-                data-href="https://www.facebook.com/permalink.php?story_fbid=832324443913035&id=100014064605939&comment_id=832600490552097"
-                data-width="540"></div>
-            </div>
+            
+            {% for facebook_comment in facebook_comments %}
+                {% include 'templates/facebook_comment.html' %}
+            {% endfor %}
+            
         </div>
     </section>
     <section class="feedback section container">

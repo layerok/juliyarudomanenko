@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\Service;
+use \App\Models\FacebookComment;
 /**
  * Home controller
  *
@@ -19,10 +20,13 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
+        $facebook_comment = new FacebookComment();
+        $facebook_comments = $facebook_comment->getAll();
         $service = new Service();
         $services = $service->getAll();
         View::renderTemplate('Home/index.html',[
-            "services" => $services
+            "services" => $services,
+            "facebook_comments" => $facebook_comments
             ]);
     }
 }
