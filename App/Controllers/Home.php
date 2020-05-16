@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
-
+use \App\Models\Service;
 /**
  * Home controller
  *
@@ -19,6 +19,10 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Home/index.html');
+        $service = new Service();
+        $services = $service->getAll();
+        View::renderTemplate('Home/index.html',[
+            "services" => $services
+            ]);
     }
 }

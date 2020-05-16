@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 
+
 /**
  * Example user model
  *
@@ -11,59 +12,39 @@ use PDO;
  */
 class Service extends \Core\Model
 {
-
+    public $path = "/img/services/";
+    public $currency = " грн.";
     /**
      * Get all the services as an associative array
      *
      * @return array
      */
-    public static function getAll()
+    public function getAll()
     {
-        $arr = array(
-            array(
-                "id" => 1,
-                "name" => "Индивидуальное консультирование и психотерапия",
-                "desc" => "Готова оказать Вам профессиональную психологическую помощь и поддержку в бережной атмосфере консультаций и психотерапии в работе с такими запросами: самооценка; самореализация; самоуважение; гармонизация межличностных отношений; семейные и личные кризисы; созависимость и зависимое поведение; одиночество и создание отношений; ревность; измена; обида; горе; проблемы в сексуальной сфере; тревога; страхи; психосоматика; психотравма; прокрастинация.",
-                "price" => "700 грн.",
-                "duration" => "1 час",
-                "image" =>"woman-talking-with-therapist_W256.png"
-            ),
-            array(
-                "id" => 2,
-                "name" => "Семейное консультирование и психотерапия",
-                "desc" => "Любовь, доверие, взаимопонимание, уважение. Живут ли они в вашей семье? Счастливая семья, как минимум, обладает таким набором ценностей. Готова предоставить Вашей семье профессиональную психологическую помощь и поддержку в кризисные периоды. Работаю с гетеро и гомосексуальными парами.",
-                "price" => "700 грн.",
-                "duration" => "1 час",
-                "image" =>"couple_W256.png"
-            ),
-            array(
-                "id" => 3,
-                "name" => "Детская и подростковая психологическая коррекция",
-                "desc" => "Оптимизация детско-родительских отношений, детская агрессивность, страхи, адаптация, «трудный» ребёнок, ребенок с «особенностями».",
-                "price" => "700 грн.",
-                "duration" => "1 час",
-                "image" =>"child_W255.png"
-            ),
-            
-            
-        );
+        $sql ="SELECT * FROM services";
+
+        $db = static::getDB();
+        $stmt = $db->query($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        return $stmt->fetchAll();
     }
     /**
      * Get service by id as an associative array
      *
      * @return array
      */
-    public static function getService($id)
+    public function getService($id)
     {
-        $arr = array(
-            "id" => 1,
-            "name" => "Индивидуальное консультирование и психотерапия",
-            "desc" => "Готова оказать Вам профессиональную психологическую помощь и поддержку в бережной атмосфере консультаций и психотерапии в работе с такими запросами: самооценка; самореализация; самоуважение; гармонизация межличностных отношений; семейные и личные кризисы; созависимость и зависимое поведение; одиночество и создание отношений; ревность; измена; обида; горе; проблемы в сексуальной сфере; тревога; страхи; психосоматика; психотравма; прокрастинация.",
-            "price" => "700 грн.",
-            "duration" => "1 час",
-            "image" =>"woman-talking-with-therapist_W256.png"
-        );
-        return $arr;
+        $sql = "SELECT * FROM services
+                WHERE id = :id";
+        $db = static::getDB();
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":id",$id,PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute();
+        return $stmt->fetch();
     }
     
 }

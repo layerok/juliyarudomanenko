@@ -20,7 +20,12 @@ class Appointment extends \Core\Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Appointment/index.html');
+        $service = new Service();
+        $services = $service->getAll();
+        View::renderTemplate('Appointment/index.html',[
+            "services" => $services
+            ]
+        );
     }
 
      /**
@@ -34,9 +39,9 @@ class Appointment extends \Core\Controller
         if(isset($id)){
             
             $service = new Service();
-            $appointment = $service->getService(1);
+            $service = $service->getService($id);
             View::renderTemplate('Appointment/show.html',[
-                'appointment'=> $appointment
+                'service'=> $service
             ]
             
         );
