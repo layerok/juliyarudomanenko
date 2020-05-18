@@ -1,12 +1,14 @@
 {% set page = "home"%}
 {% extends "base.html" %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}Психологическая помощь от Юлии Рудоманенко{% endblock %}
 
 {% block footer%} 
     <!-- Load Facebook SDK for JavaScript -->
     <div id="fb-root"></div>
     <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
+    <script src="/js/homeFormValidation.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -23,53 +25,50 @@
             </div>
         </div>
     </section>
-    <section id="services" class="services section container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="h1 ">Услуги</h2>
-            </div>
-        </div>
-        {% for service in services %}
-            {% include 'templates/service.html' %}
-        {% endfor %}
-        
-    </section>
-    <section class="comments section container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="h1 mb-4">Отзывы</h2>
-            </div>
-        </div>
-        <div class="row">
-            
-            {% for facebook_comment in facebook_comments %}
-                {% include 'templates/facebook_comment.html' %}
-            {% endfor %}
-            
-        </div>
-    </section>
-    <section class="feedback section container">
+
+    <!-- Услуги -->
+    {% include 'templates/service.html' %}
+
+    <!-- Комментарии -->
+    {% include 'templates/facebook_comment.html' %}      
+
+    <section id="feedback" class="feedback section container">
         <div class="row">
             <div class="col-lg-6">
                 <h2 class="h1 mb-4">Оставьте сообщение</h2>
-                <form action="#contact" method="post" >
+                
+                {% if errors %}
+                    <div class="p-2 border my-4">
+                        
+                        {% for error in errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+            
+                <form name="messageForm" id="message-form" action="/home/send#feedback" method="post" >
                     <div class="form-group">
                       <label for="name">Имя:</label>
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Иван Иванович Иванов" 
-                      value="">
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя" 
+                      value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
+                      <div class="invalid-feedback">Введите имя</div>
+                      <div class="valid-feedback">Выглядит хорошо</div>
                     </div>
                     <div class="form-group">
                         <label for="phone">Телефон:</label>
                         <input type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
-                        value="">
+                        value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
+                        <div class="invalid-feedback">Укажите верный телефон</div>
+                        <div class="valid-feedback">Выглядит хорошо</div>
                       </div>
                       <div class="form-group">
                         <label for="message">Сообщение:</label>
-                        <textarea class="form-control " name="message" id="message" placeholder="Кратко опишите вашу проблему" ></textarea>
+                        <textarea class="form-control " name="message" id="message" placeholder="Кратко опишите вашу проблему" >{% if post_data.message %}{{ post_data.message }}{% endif%}</textarea>
                       </div>
-                    <input type="submit" name="submit" class="btn btn-light" value="Отправить">
+                    <input id="send-message-btn" type="submit" name="submit" class="btn btn-light" value="Отправить">
                     <div class="form-group my-3">
-                        <p class="text-success text-center"></p>
+                        <p class="confirmation text-success text-center" style="display:none">Спасибо! Ваше сообщение отправлено!</p>
                     </div>
                   </form>
             </div>

@@ -1,33 +1,44 @@
-<div class="row mt-4">
-    <div class="col-lg-3">
-        <img src="{{ service.path ~ service.image}}" alt="" class="img-fluid">
-    </div>
-    <div class="col-9">
+{% if services %}
+    <section id="services" class="services section container">
         <div class="row">
-            <div class="col">
-                <h3 class="h3 mb-4">{{ service.name}}</h3>
+            <div class="col text-center">
+                <h2 class="h1 ">Услуги</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="properties">
-                    <div class="property d-flex align-items-center pb-2">
-                        <i class="property__icon far fa-clock"></i>
-                        <span class="property__text px-2">{{ service.duration }}</span>
+        {% for service in services %}
+            <div class="row mt-4">
+                <div class="col-lg-3">
+                    <img src="{{ service.path ~ service.image}}" alt="" class="img-fluid">
+                </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="h3 mb-4">{{ service.name}}</h3>
+                        </div>
                     </div>
-                    <div class="property d-flex align-items-center pb-2">
-                        <i class="property__icon far fa-money-bill-alt"></i>
-                        <span class="property__text px-2">{{ service.price ~ service.currency}}</span>
+                    <div class="row">
+                        <div class="col">
+                            <div class="properties">
+                                <div class="property d-flex align-items-center pb-2">
+                                    <i class="property__icon far fa-clock"></i>
+                                    <span class="property__text px-2">{{ service.duration }}</span>
+                                </div>
+                                <div class="property d-flex align-items-center pb-2">
+                                    <i class="property__icon far fa-money-bill-alt"></i>
+                                    <span class="property__text px-2">{{ service.price ~ service.currency}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col">
+                            <a class="btn btn-light " href="/appointment/{{ service.id }}/show">Узнать больше</a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
-            
-        </div>
-        <div class="row pt-2">
-            <div class="col">
-                <a class="btn btn-light " href="/appointment/{{ service.id }}/show">Узнать больше</a>
-            </div>
-            
-        </div>
-    </div>
-</div>
+        {% endfor %}
+    </section>
+{% endif %}

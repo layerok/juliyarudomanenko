@@ -62,6 +62,15 @@ a:hover{
 .border-primary{
     border-color: var(--primary)!important;
 }
+.border-light{
+    border-color: var(--light)!important;
+}
+.border-lighter{
+    border-color: var(--lighter)!important;
+}
+.border-dark{
+    border-color: var(--dark)!important;
+}
 .btn-light{
     background-color: var(--light)!important;
     color:#fff!important;
@@ -79,7 +88,11 @@ a:hover{
     color:var(--dark);
     
 }
+
 .text-light{
+    color:var(--light)!important;
+}
+.text-secondary{
     color:var(--secondary)!important;
 }
 /** Page **/

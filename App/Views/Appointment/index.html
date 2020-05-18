@@ -6,15 +6,9 @@
 {% block footer%} {% endblock %}
 
 {% block body %}
-<section class="services section container">
-    <div class="row">
-        <div class="col text-center">
-            <h2 class="h1 ">Услуги</h2>
-        </div>
-    </div>
-    {% for service in services %}
-        {% include 'templates/service.html' %}
-    {% endfor %}
+
     
-</section>
+    {% include 'templates/service.html' %}
+    
+
 {% endblock %}

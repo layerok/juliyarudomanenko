@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\Service;
+use \App\Models\Message;
+use \App\Request;
+
 use \App\Models\FacebookComment;
 /**
  * Home controller
@@ -12,7 +15,17 @@ use \App\Models\FacebookComment;
  */
 class Home extends \Core\Controller
 {
+    public $facebook_comment;
+    public $facebook_comments;
+    public $service;
+    public $services;
 
+    public function before(){
+        $this->facebook_comment = new FacebookComment();
+        $this->facebook_comments = $this->facebook_comment->getAll();
+        $this->service = new Service();
+        $this->services = $this->service->getAll();
+    }
     /**
      * Show the index page
      *
@@ -20,13 +33,40 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-        $facebook_comment = new FacebookComment();
-        $facebook_comments = $facebook_comment->getAll();
-        $service = new Service();
-        $services = $service->getAll();
         View::renderTemplate('Home/index.html',[
-            "services" => $services,
-            "facebook_comments" => $facebook_comments
+            "services" => $this->services,
+            "facebook_comments" => $this->facebook_comments
             ]);
+    }
+
+    /**
+     * Send message
+     *
+     * @return void
+     */
+    public function sendAction()
+    {
+        if(Request::isPost()){
+            $message = new Message($_POST);
+            $message->save();
+            if(Request::isAjax()){
+                $response = [
+                    "errors" => $message->errors
+                ];
+                echo json_encode($response);
+
+            }else{
+                View::renderTemplate('Home/index.html',[
+                    "services" => $this->services,
+                    "facebook_comments" => $this->facebook_comments,
+                    "errors" => $message->errors,
+                    "post_data" => $_POST
+                ]);
+
+            }
+
+        }
+        
+            
     }
 }
