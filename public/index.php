@@ -29,11 +29,18 @@ set_exception_handler('Core\Error::exceptionHandler');
 $router = new Core\Router();
 
 // Add the routes
+$router->add('admin/login', ['controller' => 'Login', 'action' => 'index','namespace' => 'Admin']);
+$router->add('admin/logout', ['controller' => 'Login', 'action' => 'destroy','namespace' => 'Admin']);
+$router->add('admin', ['controller' => 'Home', 'action' => 'index', 'namespace' => 'Admin']);
+
+$router->add('', ['controller' => 'Home', 'action' => 'index']);
 
 $router->add('{controller}/{action}');
-$router->add('home', ['controller' => 'Home', 'action' => 'index']);
+$router->add('{controller}/{id:[\d]+}/{action}');
+
 $router->add('admin/{controller}/{action}',['namespace' => 'Admin']);
 
-$router->add('{controller}/{id:[\d]+}/{action}');
+
+
     
 $router->dispatch($_SERVER['QUERY_STRING']);

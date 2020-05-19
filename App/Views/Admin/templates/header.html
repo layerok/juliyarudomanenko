@@ -2,31 +2,31 @@
     <div class="secondary-nav container-fluid bg-lighter  d-none d-md-flex ">
         
             
-                <div class="offset-lg-4 offset-md-2 col-lg-3 col-md-4 col-sm-5">
-                    <div class="phone">
-                        <div class="phone__inner d-flex align-items-center">
-                            <i class="phone__icon fas fa-phone"></i>
-                            <span class="phone__number ml-1">+38(067)830-0340</span>
-                        </div>
-                    </div>
+        <div class="offset-lg-4 offset-md-2 col-lg-3 col-md-4 col-sm-5">
+            <div class="phone">
+                <div class="phone__inner d-flex align-items-center">
+                    <i class="phone__icon fas fa-phone"></i>
+                    <span class="phone__number ml-1">+38(067)830-0340</span>
                 </div>
-                <div class="col-lg-5 col-md-6 ">
-                    <nav class="nav h-100 pb-1 justify-content-end px-2">
-                        <a href="/" class="nav-link align-self-center text-white{% if page == 'science_articles' %} active {% endif %}">Научные статьи</a>
-                        <a href="/" class="nav-link align-self-center text-white{% if page == 'certificates' %} active {% endif %}">Сертификаты</a>
-                        {% if current_admin %}
-                            <a class="nav-link align-self-center text-white" href="/admin/login/destroy"><i class="fas fa-sign-out-alt"></i> Выход</a>
-                        {% else %}
-                            <a class="nav-link align-self-center text-white" href="/admin/login/index"><i class="far fa-user"></i> Войти</a> 
-                        {% endif %}
-                    </nav>
-                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6 ">
+            <nav class="nav h-100 pb-1 justify-content-end px-2">
+                <a href="/admin" class="nav-link align-self-center text-white{% if page == 'science_articles' %} active {% endif %}">Научные статьи</a>
+                <a href="/admin" class="nav-link align-self-center text-white{% if page == 'certificates' %} active {% endif %}">Сертификаты</a>
+                {% if current_admin %}
+                    <a class="nav-link align-self-center text-white" href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>
+                {% else %}
+                    <a class="nav-link align-self-center text-white" href="/admin/login"><i class="far fa-user"></i> Войти</a> 
+                {% endif %}
+            </nav>
+        </div>
                        
     </div>
     <div class="main-nav container-fluid bg-light border-bottom border-primary">
         
             <nav class="navbar navbar-expand-md navbar-dark px-0 px-md-2">
-                <a class="navbar-brand" href="/admin/home/index">
+                <a class="navbar-brand" href="/admin">
                     <h2 class="navbar-brand__name h1 text-white">Управление содержимым</h2>
                     <h5 class="navbar-brand__position h5">Психолог, психотерапевт</h5>
                 </a>
@@ -36,16 +36,16 @@
               
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <nav class="navbar-nav ml-auto ">
-                    <a class="nav-link text-white{% if page == 'home' %} active {% endif %}" href="/">Главная </a>
-                    <a class="nav-link text-white{% if page == 'online_appointment' %} active {% endif %}" href="/appointment/index">Записаться</a>
-                    <a class="nav-link text-white{% if page == 'about' %} active {% endif %}" href="/about/index">Обо мне</a>
+                    <a class="nav-link text-white{% if page == 'home' %} active {% endif %}" href="/admin">Главная </a>
+                    <a class="nav-link text-white{% if page == 'service' %} active {% endif %}" href="/admin/service/index">Услуги</a>
+                    <a class="nav-link text-white{% if page == 'about' %} active {% endif %}" href="/admin">Обо мне</a>
                     <div class="dropdown-divider"></div>
                     <a class="nav-link text-white d-md-none{% if page == 'science_articles' %} active {% endif %}" href="/" >Научные статьи</a>
                     <a class="nav-link text-white d-md-none{% if page == 'certificates' %} active {% endif %}" href="/" >Сертификаты</a>
                     {% if current_admin %}
-                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/login/destroy"><i class="fas fa-sign-out-alt"></i> Выход</a>
+                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>
                     {% else %}
-                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/login/index"><i class="far fa-user"></i> Войти</a> 
+                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/login"><i class="far fa-user"></i> Войти</a> 
                     {% endif %}
                   </ul>
                 </div>
