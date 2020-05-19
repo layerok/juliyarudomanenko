@@ -4,6 +4,8 @@ namespace App\Models;
 
 use PDO;
 use \App\Models\Customer;
+use \App\Telegram;
+use \App\Config;
 
 
 /**
@@ -62,6 +64,28 @@ class Message extends \Core\Model
         $this->validate();
 
         if(empty($this->errors)) {
+
+
+            $post_data = [
+                "name" => [
+                    "value" => $this->name ?? "",
+                    "description" => "Имя",
+                    "emoji"=>"\xE2\x9C\x8F"
+                ],
+                "phone" => [
+                    "value" => $this->phone ?? "",
+                    "description" => "Телефон",
+                    "emoji"=>"\xF0\x9F\x93\x9E"
+                ],
+                "message" => [
+                    "value" => $this->message ?? "",
+                    "description" => "Сообщение",
+                    "emoji"=>"\xF0\x9F\x93\xA8"
+                ]
+            ];
+
+            $telegram = new Telegram(Config::BOT_TOKEN,Config::CHAT_ID);
+            $telegram->send("Сообщение",$post_data);
 
             $customer = new Customer($_POST);  
             $customer_id =  $customer->phoneExists($customer->phone);

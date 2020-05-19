@@ -63,6 +63,27 @@ class Appointment extends \Core\Model
 
         if(empty($this->errors)) {
 
+            $post_data = [
+                "name" => [
+                    "value" => $this->name ?? "",
+                    "description" => "Имя",
+                    "emoji"=>"\xE2\x9C\x8F"
+                ],
+                "phone" => [
+                    "value" => $this->phone ?? "",
+                    "description" => "Телефон",
+                    "emoji"=>"\xF0\x9F\x93\x9E"
+                ],
+                "format" => [
+                    "value" => $this->format ?? "",
+                    "description" => "Формат встречи",
+                    "emoji"=>"\xF0\x9F\x93\xA8"
+                ]
+            ];
+
+            $telegram = new Telegram(Config::BOT_TOKEN,Config::CHAT_ID);
+            $telegram->send("Запись на прием",$post_data);
+
             $customer = new Customer($_POST);  
             $customer_id =  $customer->phoneExists($customer->phone);
             if(!$customer_id){

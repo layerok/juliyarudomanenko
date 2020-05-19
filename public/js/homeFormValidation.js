@@ -92,6 +92,7 @@ $( document ).ready(function() {
                         isPhoneValid = false;
                         isNameValid = false;
                     }else{
+                        
                         alert("Возникла ошибка. Попробуйте еще раз");
                     }
                     
