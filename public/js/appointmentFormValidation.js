@@ -1,9 +1,9 @@
 $( document ).ready(function() {
 
-    let form = $('#message-form');
+    let form = $('#appointment-form');
     let phoneInput = $("[name='phone']");
     let nameInput = $("[name='name']");
-    let messageInput = $("[name='message']");
+  
 
     $.jMaskGlobals = {
         translation: {
@@ -69,9 +69,9 @@ $( document ).ready(function() {
     
     form.submit(function(e){
 
-        e.preventDefault();
+         e.preventDefault();
 
-        if(isPhoneValid && isNameValid){
+         if(isPhoneValid && isNameValid){
             let form = $(this);        
             let formData = new FormData(form[0]);
 
@@ -85,18 +85,17 @@ $( document ).ready(function() {
                 success: function(data){
                     if(data.errors.length == 0){
                         setUndefined([phoneInput,nameInput]);
-                        clearValue([phoneInput,nameInput,messageInput]);
+                        clearValue([phoneInput,nameInput]);
                         
-                        
-                        $(".confirmation").show().delay(2000).fadeOut();
                         isPhoneValid = false;
                         isNameValid = false;
+                        window.location.href = "/appointment/thank-you";
                     }else{
                         alert("Возникла ошибка. Попробуйте еще раз");
                     }
                     
                 },
-                error: function(){
+                error: function(data){
                     alert("Возникла ошибка. Попробуйте еще раз!");
                 }
             });
@@ -107,7 +106,7 @@ $( document ).ready(function() {
             if(!isNameValid){
                 setInvalid(nameInput);
             }
-        }
+        } 
         
        
     });

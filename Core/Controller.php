@@ -52,7 +52,18 @@ abstract class Controller
             throw new \Exception("Method $method not found in controller " . get_class($this));
         }
     }
-
+    /**
+     * Redirect to a different page
+     * 
+     * @param string $url The relative URL
+     * 
+     * @return void
+     */
+    public function redirect($url) 
+    {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
+            exit;
+    }
     /**
      * Before filter - called before an action method.
      *

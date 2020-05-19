@@ -20,6 +20,11 @@ html{
 .active{
     color:var(--dark)!important;
 }
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: var(--light);
+    background-color: var(--light);
+}
 :root{
     --lighter:#75C788;
     --light: #6ab47b;
@@ -114,7 +119,7 @@ a:hover{
     font-weight:800;
 }
 .main-nav{
-    font-size:18px;
+    font-size:17px;
 }
 .secondary-nav{
     font-size:14px;
@@ -158,5 +163,28 @@ a:hover{
 .copyright{
     color:var(--secondary);
     font-size:12px;
+}
+
+@media all and (max-width:768px) {
+    .h1{
+        font-size:28px;
+    }
+    .h3{
+        font-size:20px; 
+    }
+    .section{
+        margin-top:45px;
+    }
+    .property__icon{
+        font-size:20px;
+    }
+    .property__text{
+        font-size:14px;
+    }
+}
+@media all and (max-width:400px){
+    .h1{
+        font-size:22px;
+    }
 }
 
