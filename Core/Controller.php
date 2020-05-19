@@ -93,7 +93,7 @@ abstract class Controller
         if(!Auth::getAdmin()) {
             Flash::addMessage('Пожалуйста выполните вход!', Flash::INFO);
             Auth::rememberRequestedPage();
-            $this->redirect('/login/index');
+            $this->redirect('/admin/login/index');
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
 /**
  * Authenticated base controller

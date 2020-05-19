@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
 use \Core\View;
 use \App\Models\Admin;
@@ -21,7 +21,7 @@ class Login extends \Core\Controller {
 
             Flash::addMessage('Вход выполнен!');
             
-            $this->redirect("/hub/index");
+            $this->redirect("/admin/home/index");
 
         }else{
             
@@ -53,7 +53,7 @@ class Login extends \Core\Controller {
     {
         Flash::addMessage('Выход выполнен!');
 
-        $this->redirect('/admin/login');
+        $this->redirect('/admin/login/index');
     }
 
 }

@@ -1,7 +1,7 @@
 
-{% extends "base.html" %}
+{% extends "admin/base.html" %}
 
-{% block title %}Вход{% endblock %}
+{% block title %}Главная{% endblock %}
 
 {% block footer%} 
 
@@ -21,7 +21,7 @@
 
     {% endif %}
 
-    <form  method="post" action="/login/create">
+    <form  method="post" action="/admin/login/create">
         <div class="form-group">
             <label for="inputEmail">Email</label>
             <input class="form-control" type="email" id="inputEmail" name="email" placeholder="example@example.com" value="{{ email}}" >
