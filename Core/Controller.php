@@ -1,7 +1,8 @@
 <?php
 
 namespace Core;
-
+use \App\Auth;
+use \App\Flash;
 /**
  * Base controller
  *
@@ -80,5 +81,19 @@ abstract class Controller
      */
     protected function after()
     {
+    }
+    /**
+     * Require the admin to be logged in before giving access to the requested page.
+     * 
+     * 
+     * @return void
+     */
+    public function requireLogin()
+    {
+        if(!Auth::getAdmin()) {
+            Flash::addMessage('Пожалуйста выполните вход!', Flash::INFO);
+            Auth::rememberRequestedPage();
+            $this->redirect('/login/index');
+        }
     }
 }

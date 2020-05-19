@@ -14,6 +14,11 @@
                     <nav class="nav h-100 pb-1 justify-content-end px-2">
                         <a href="/" class="nav-link align-self-center text-white{% if page == 'science_articles' %} active {% endif %}">Научные статьи</a>
                         <a href="/" class="nav-link align-self-center text-white{% if page == 'certificates' %} active {% endif %}">Сертификаты</a>
+                        {% if current_admin %}
+                            <a class="nav-link align-self-center text-white" href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>
+                        {% else %}
+                            <a class="nav-link align-self-center text-white" href="/admin/login"><i class="far fa-user"></i> Войти</a> 
+                        {% endif %}
                     </nav>
                 </div>
                        
@@ -37,6 +42,11 @@
                     <div class="dropdown-divider"></div>
                     <a class="nav-link text-white d-md-none{% if page == 'science_articles' %} active {% endif %}" href="/" >Научные статьи</a>
                     <a class="nav-link text-white d-md-none{% if page == 'certificates' %} active {% endif %}" href="/" >Сертификаты</a>
+                    {% if current_admin %}
+                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>
+                    {% else %}
+                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/login"><i class="far fa-user"></i> Войти</a> 
+                    {% endif %}
                   </ul>
                 </div>
               </nav>

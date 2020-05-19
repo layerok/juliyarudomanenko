@@ -60,6 +60,9 @@ a:hover{
 .border-dark{
     border-color: var(--dark)!important;
 }
+.border-none{
+    border:none!important;
+}
 
 .border-bottom{
     border-bottom:5px solid var(--light)!important;

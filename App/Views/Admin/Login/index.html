@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+
+{% block title %}Вход{% endblock %}
+
+{% block footer%} 
+
+{% endblock %}
+
+{% block body %}
+
+<section class="section container">
+    <h1>Вход</h1>
+    {% if admin.errors is not empty %}
+        <div class="p-2 border my-4">
+            
+            {% for error in admin.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+    <form  method="post" action="/login/create">
+        <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input class="form-control" type="email" id="inputEmail" name="email" placeholder="example@example.com" value="{{ email}}" >
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Пароль</label>
+            <input class="form-control" type="password" id="inputPassword" name="password" placeholder="Пароль">
+        </div>
+        <button class="btn btn-light " type="submit">Войти</button>
+        
+    </form>
+</section>
+    
+
+{% endblock %}

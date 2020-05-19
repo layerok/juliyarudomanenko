@@ -10,7 +10,10 @@
  * Composer
  */
 require dirname(__DIR__) . '/vendor/autoload.php';
-
+/**
+ * Sessions
+ */
+session_start();
 
 /**
  * Error and Exception handling
@@ -27,7 +30,10 @@ $router = new Core\Router();
 
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
+$router->add('admin/login', ['controller' => 'Login', 'action' => 'index']);
+$router->add('admin/logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('{controller}/{action}');
+$router->add('admin/{controller}/{action}');
 $router->add('{controller}/{id:[\d]+}/{action}');
     
 $router->dispatch($_SERVER['QUERY_STRING']);
