@@ -5,19 +5,16 @@ namespace App\Models;
 use PDO;
 use \App\Upload;
 
-
 /**
  * Example user model
  *
  * PHP version 7.0
  */
-class Service extends \Core\Model
+class Certificate extends \Core\Model
 {
-    public $path = "/img/services/";
-    public $currency = " грн.";
+    public $path = "/img/certificates/";
     public $errors = [];
-
-     /**
+    /**
      * Class constructor
      * 
      * @param array $date Initial property values
@@ -32,13 +29,13 @@ class Service extends \Core\Model
         $this->files = $files;
     }
     /**
-     * Get all the services as an associative array
+     * Get all the certificates as an associative array
      *
      * @return array
      */
     public static function getAll()
     {
-        $sql ="SELECT * FROM services";
+        $sql ="SELECT * FROM certificates";
 
         $db = static::getDB();
         $stmt = $db->query($sql);
@@ -47,13 +44,13 @@ class Service extends \Core\Model
         return $stmt->fetchAll();
     }
     /**
-     * Get service by id as an associative array
+     * Get model by id as an associative array
      *
      * @return array
      */
-    public function getService($id)
+    public function getOne($id)
     {
-        $sql = "SELECT * FROM services
+        $sql = "SELECT * FROM certificates
                 WHERE id = :id";
         $db = static::getDB();
 
@@ -64,7 +61,7 @@ class Service extends \Core\Model
         return $stmt->fetch();
     }
     /**
-     * Save the service model with the current property values
+     * Save the model with the current property values
      * 
      * @return
      */
@@ -74,17 +71,13 @@ class Service extends \Core\Model
 
         if(empty($this->errors)) {
 
-            $this->description = htmlspecialchars($this->description);
-            $sql = "INSERT INTO services (name, price, duration, description, image)
-                    VALUES (:name, :price, :duration,'".$this->description."', :image)";
+            $sql = "INSERT INTO certificates (name,  image)
+                    VALUES (:name, :image)";
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
-            $stmt->bindValue(':price', $this->price, PDO::PARAM_INT);
-            $stmt->bindValue(':duration', $this->duration, PDO::PARAM_STR);
-            
             $stmt->bindValue(':image', $this->image_name, PDO::PARAM_STR);
 
             return $stmt->execute();
@@ -102,12 +95,9 @@ class Service extends \Core\Model
 
         if(empty($this->errors)) {
 
-            $this->description = htmlspecialchars($this->description);
-            $sql = "UPDATE services 
+            
+            $sql = "UPDATE certificates 
                     SET name = :name, 
-                        price = :price, 
-                        duration = :duration, 
-                        description = '".$this->description."' , 
                         image = :image
                     WHERE id = :id";
                     
@@ -116,9 +106,6 @@ class Service extends \Core\Model
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
-            $stmt->bindValue(':price', $this->price, PDO::PARAM_INT);
-            $stmt->bindValue(':duration', $this->duration, PDO::PARAM_STR);
-            
             $stmt->bindValue(':image', $this->image_name, PDO::PARAM_STR);
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
@@ -131,25 +118,16 @@ class Service extends \Core\Model
         if(empty($this->name)){
             $this->errors[] = "Введите 'Название' услуги";
         }
-        if(empty($this->price)){
-            $this->errors[] = "Введите 'Стоимость' услуги";
-        }
-        if(empty($this->duration)){
-            $this->errors[]= "Введите 'Продолжительность' услуги";
-        }
-        if(empty($this->description)){
-            $this->errors[] = "Введите 'Описание' услуги";
-        }
         if (!empty($this->files['image']['tmp_name'][0])){
 
             $this->image = new Upload($this->files['image']);
 
             if(empty($this->erorrs)){
 
-                if($this->image->save()){
+                if($this->image->save($this->path)){
                     if(!empty($id)){
-                        $service = $this->getService($id);
-                        Upload::delete($this->path.$service->image);
+                        $record = $this->getOne($id);
+                        Upload::delete($this->path.$record->image);
                     }
                     
                     $this->image_name = $this->image->image_name;
@@ -162,8 +140,8 @@ class Service extends \Core\Model
         }else{
 
             if(!empty($id)){
-                $service = $this->getService($id);
-                $this->image_name = $service->image;
+                $record = $this->getOne($id);
+                $this->image_name = $record->image;
             }else{
                 $this->errors[] = "Файл не был загружен";
             }
@@ -179,10 +157,10 @@ class Service extends \Core\Model
     public function delete($id)
     {
         
-        $service = $this->getService($id);
-        Upload::delete($this->path.$service->image);
+        $record = $this->getOne($id);
+        Upload::delete($this->path.$record->image);
 
-        $sql = "DELETE FROM services 
+        $sql = "DELETE FROM certificates 
                 WHERE id = :id";
         $db = static::getDB();
 
@@ -192,5 +170,6 @@ class Service extends \Core\Model
         return $stmt->execute();
         
     }
+    
     
 }

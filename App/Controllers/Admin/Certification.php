@@ -3,24 +3,24 @@
 namespace App\Controllers\Admin;
 
 use \Core\View;
-use \App\Models\FacebookComment as FacebookCommentModel;
+use \App\Models\Certificate; 
 use \App\Request;
 use \App\Flash;
 
-class Comment extends Authenticated
+class Certification extends Authenticated
 {
 
     public function indexAction()
     {
-        $records = FacebookCommentModel::getAll();
-        View::renderTemplate('/admin/facebook-comment/index.html',[
+        $records = Certificate::getAll();
+        View::renderTemplate('/admin/certificate/index.html',[
             'records' => $records
         ]);
     }
 
     public function addAction()
     {
-        View::renderTemplate('/admin/facebook-comment/add.html');
+        View::renderTemplate('/admin/certificate/add.html');
     }
 
     public function editAction()
@@ -28,10 +28,10 @@ class Comment extends Authenticated
         $id = $this->route_params['id'] ?? null;
         if(isset($id)){
             
-            $record = new FacebookCommentModel(); 
+            $record = new Certificate(); 
             $record = $record->getOne($id);
             
-            View::renderTemplate('/admin/facebook-comment/edit.html',[
+            View::renderTemplate('/admin/certificate/edit.html',[
                 'record' => $record
             ]);
         }else{
@@ -44,18 +44,19 @@ class Comment extends Authenticated
         if(Request::isPost()){
             
             
-            $record = new FacebookCommentModel($_POST); 
+            $record = new Certificate($_POST, $_FILES); 
             
             if($record->save()){
-                Flash::addMessage("Комментарий добавлен",Flash::SUCCESS);
-                $this->redirect("/admin/comment/index");
+                Flash::addMessage("Запись добавлена",Flash::SUCCESS);
+                $this->redirect("/admin/certification/index");
             }else{
 
                 foreach($record->errors as $value){
                     Flash::addMessage($value,Flash::DANGER);
                 }
-                View::renderTemplate('/admin/facebook-comment/add.html',[
-                    'post' => $_POST
+                View::renderTemplate('/admin/certificate/add.html',[
+                    'post' => $_POST,
+                    'files' => $_FILES
                 ]);
                 
             } 
@@ -67,19 +68,20 @@ class Comment extends Authenticated
             
             $id = $this->route_params['id'] ?? null;
             if(isset($id)){
-                $record = new FacebookCommentModel($_POST); 
+                $record = new Certificate($_POST, $_FILES); 
                 
                 if($record->saveChanges($id)){
                     Flash::addMessage("Изменения сохранены",Flash::SUCCESS);
-                    $this->redirect("/admin/comment/index");
+                    $this->redirect("/admin/certification/index");
                 }else{
 
                     foreach($record->errors as $value){
                         Flash::addMessage($value,Flash::DANGER);
                     }
                     $record->id = $id;
-                    View::renderTemplate('/admin/facebook-comment/edit.html',[
+                    View::renderTemplate('/admin/certificate/edit.html',[
                         'post' => $_POST,
+                        'files' => $_FILES,
                         'record' => $record
                     ]);
                 }
@@ -94,14 +96,13 @@ class Comment extends Authenticated
         $id = $this->route_params['id'] ?? null;
         if(isset($id)){
             
-            $record = new FacebookCommentModel(); 
+            $record = new Certificate(); 
             if($record->delete($id)){
-                Flash::addMessage("Комментарий удален",Flash::SUCCESS);
-                $this->redirect("/admin/comment/index");
+                Flash::addMessage("Запись удалена",Flash::SUCCESS);
             }else{
                 Flash::addMessage("Возникла ошибка удаления записи. Обратитесь к разработчику",Flash::DANGER);
-                $this->redirect("/admin/comment/index");
             }
+            $this->redirect("/admin/certification/index");
         }else{
             throw new \Exception("Id is not specified",404);
         }

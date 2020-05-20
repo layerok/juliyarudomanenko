@@ -41,6 +41,8 @@ class Appointment extends \Core\Controller
             
             $service = new Service();
             $service = $service->getService($id);
+            $service->description = htmlspecialchars_decode($service->description);
+            
             if($service){
                 View::renderTemplate('Appointment/show.html',[
                     'service'=> $service

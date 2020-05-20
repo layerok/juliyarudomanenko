@@ -1,0 +1,36 @@
+{% set page = "certificate"%}
+{% extends "base.html" %}
+
+{% block title %}Сертификаты{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.css" integrity="sha256-K4PK62zpbl/XelQ0bLxyUztMw5nLdGyd2qGmPTGM1oY=" crossorigin="anonymous" />
+{% endblock %}
+
+{% block footer%} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js" integrity="sha256-CtKylYan+AJuoH8jrMht1+1PMhMqrKnB8K5g012WN5I=" crossorigin="anonymous"></script>
+
+{% endblock %}
+    
+    
+
+{% block body %}
+<section class="section container">
+    <div class="row">
+        <div class="col">
+            <h1 class="h1">Сертификаты</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+                {% for record in records %}
+                    <div>
+                        <a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+    
+</section>
+
+
+{% endblock %}

@@ -8,6 +8,28 @@
 {% endblock %}
     
 {% block body %}
+<!-- ACTIONS -->
+<section id="actions" class="py-4 mb-4 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="/admin/certification/add" class="btn btn-primary btn-block" >
+          <i class="fas fa-plus"></i> Добавить сертификат
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="/admin/session/add" class="btn btn-warning btn-block text-white" >
+          <i class="fas fa-plus"></i> Добавить услугу
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="/admin/comment/add" class="btn btn-success btn-block" >
+          <i class="fas fa-plus"></i> Добавить комментарий
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
     <!-- Appointmetns -->
   <section class="section">
     <div class="container">
@@ -25,6 +47,7 @@
                   <th>Пользователь</th>
                   <th>Услуга</th>
                   <th>Формат</th>
+                  <th></th>
                   
                 </tr>
               </thead>
@@ -36,6 +59,11 @@
                     <td>{{ appointment.customerName }}</td>
                     <td>{{ appointment.serviceName }}</td>
                     <td>{{ appointment.format }}</td>
+                    <td>
+                      <a href="/admin/home/{{ appointment.appointmentsId }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="text-danger" >
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </td>
                     
                     </tr>
                 {% endfor %}

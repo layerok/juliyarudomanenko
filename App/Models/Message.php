@@ -123,6 +123,24 @@ class Message extends \Core\Model
         }
         return false;
     }
+    /**
+     * delete mesage by id as an associative array
+     *
+     * @return array
+     */
+    public function delete($id)
+    {
+        
+        $sql = "DELETE FROM customer_messages
+                WHERE id = :id";
+        $db = static::getDB();
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":id",$id,PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $stmt->execute();
+        
+    }
 
     
 

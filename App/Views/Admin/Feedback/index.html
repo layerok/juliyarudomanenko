@@ -15,7 +15,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4>Услуги</h4>
+              <h4>Сообщения</h4>
             </div>
             <table class="table table-striped">
               <thead class="thead-dark">
@@ -24,7 +24,7 @@
                   <th>Клиент</th>
                   <th>Телефон</th>
                   <th>Сообщение</th>
-                  
+                  <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,6 +34,9 @@
                         <td>{{ record.name }}</td>
                         <td>{{ record.phone }}</td>
                         <td>{{ record.message }}</td>
+                        <td><a href="/admin/feedback/{{ record.customersMessagesId }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="text-danger" >
+                          <i class="fas fa-trash"></i>
+                        </a></td>
                     
                     
                     </tr>

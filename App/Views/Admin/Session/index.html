@@ -2,12 +2,26 @@
 {% extends "admin/base.html" %}
 
 {% block title %}Услуги{% endblock %}
-
+{% block head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.css" integrity="sha256-K4PK62zpbl/XelQ0bLxyUztMw5nLdGyd2qGmPTGM1oY=" crossorigin="anonymous" />
+{% endblock %}
 {% block footer%} 
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js" integrity="sha256-CtKylYan+AJuoH8jrMht1+1PMhMqrKnB8K5g012WN5I=" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block body %}
+<!-- ACTIONS -->
+<section id="actions" class="py-4 mb-4 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="/admin/session/add" class="btn btn-primary btn-block" >
+          <i class="fas fa-plus"></i> Добавить услугу
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
     <!-- Services -->
   <section class="section">
     <div class="container">
@@ -24,18 +38,25 @@
                   <th>Название</th>
                   <th>Стоимость</th>
                   <th>Продолжительность</th>
-                  <th>Описание</th>
+                  <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
                 {% for record in records %}
                     <tr>
-                    <td>{{ record.id }}</td>
-                    <td>{{ record.name }}</td>
-                    <td>{{ record.price ~ record.currency }}</td>
-                    <td>{{ record.duration }}</td>
-                    <td>{{ record.description }}</td>
-                    
+                      <td>{{ record.id }}</td>
+                      <td><a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
+                      <td>{{ record.price ~ record.currency }}</td>
+                      <td>{{ record.duration }}</td>
+                      <td class="d-flex ">
+                        <a href="/admin/session/{{ record.id }}/edit" class="mr-3" >
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="/admin/session/{{ record.id }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="text-danger" >
+                          <i class="fas fa-trash"></i>
+                        </a>
+                        
+                      </td>
                     </tr>
                 {% endfor %}
                 

@@ -20,6 +20,10 @@
             <li class="nav-item px-2">
               <a href="/admin/comment/index" class="nav-link {% if page == 'comment' %} active {% endif %}">Комментарии</a>
             </li>
+            <li class="nav-item px-2">
+              <a href="/admin/certification/index" class="nav-link {% if page == 'certificate' %} active {% endif %}">Сертификаты</a>
+            </li>
+            
           </ul>
         {% endif %}
 
@@ -58,7 +62,9 @@
             {% elseif page == "message" %}
               <i class="fas fa-envelope"></i> Сообщения
             {% elseif page == "comment" %}
-              <i class="fas fa-comment"></i></i> Комментарии
+              <i class="fas fa-comment"></i> Комментарии
+            {% elseif page == "certificate" %}
+              <i class="fas fa-graduation-cap"></i> Сертификаты
             {% endif %}
             
           </h1>

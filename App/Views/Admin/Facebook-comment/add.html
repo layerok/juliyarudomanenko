@@ -1,0 +1,59 @@
+{% set page = "comment"%}
+{% extends "admin/base.html" %}
+
+{% block title %}Добавление комментария{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block footer%} 
+<script>
+     $('.save').click(function(){
+      $('.form').submit();
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+    <!-- ACTIONS -->
+  <section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <a href="/admin/comment/index" class="btn btn-light btn-block">
+            <i class="fas fa-arrow-left"></i> Назад
+          </a>
+        </div>
+        <div class="col-md-3">
+          <button class="save btn btn-success btn-block">
+            <i class="fas fa-check"></i> Сохранить изменения
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <h4>Добавить комментарий</h4>
+            </div>
+            <div class="card-body">
+              <form class="form" action="/admin/comment/save" method="post" >
+                <div class="form-group">
+                  <label for="title">Ссылка</label>
+                  <input type="text" class="form-control" name="link" value="{{ post.link }}" >
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

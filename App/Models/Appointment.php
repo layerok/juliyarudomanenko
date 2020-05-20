@@ -37,6 +37,7 @@ class Appointment extends \Core\Model
 
     public static function getAll(){
         $sql = "SELECT appointments.*,
+                       appointments.id AS appointmentsId,
                        services.name AS serviceName, 
                        customers.name AS customerName,
                        customers.phone
@@ -127,6 +128,24 @@ class Appointment extends \Core\Model
             return $stmt->execute();
         }
         return false;
+    }
+    /**
+     * delete model by id 
+     *
+     * @return array
+     */
+    public function delete($id)
+    {
+        
+        $sql = "DELETE FROM appointments
+                WHERE id = :id";
+        $db = static::getDB();
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":id",$id,PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $stmt->execute();
+        
     }
 
     
