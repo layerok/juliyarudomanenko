@@ -4,7 +4,8 @@ namespace App\Models;
 
 use PDO;
 use \App\Models\Customer;
-
+use \App\Telegram;
+use \App\Config;
 
 /**
  * appointment model
@@ -32,6 +33,25 @@ class Appointment extends \Core\Model
         foreach($data as $key => $value) {
             $this->$key = $value;
         };
+    }
+
+    public static function getAll(){
+        $sql = "SELECT appointments.*,
+                       services.name AS serviceName, 
+                       customers.name AS customerName,
+                       customers.phone
+                FROM appointments
+                    LEFT JOIN customers
+                        ON appointments.customer_id = customers.id
+                    LEFT JOIN services
+                        ON appointments.service_id = services.id
+                ORDER BY appointments.purchase_date DESC";
+
+        $db = static::getDB();
+        $stmt = $db->query($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        return $stmt->fetchAll();
     }
 
     /**

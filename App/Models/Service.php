@@ -19,7 +19,7 @@ class Service extends \Core\Model
      *
      * @return array
      */
-    public function getAll()
+    public static function getAll()
     {
         $sql ="SELECT * FROM services";
 

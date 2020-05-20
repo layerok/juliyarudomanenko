@@ -1,41 +1,40 @@
-{% set page = "home"%}
+{% set page = "message"%}
 {% extends "admin/base.html" %}
 
-{% block title %}Панель Управления{% endblock %}
+{% block title %}Сообщения{% endblock %}
 
 {% block footer%} 
 
 {% endblock %}
-    
+
 {% block body %}
-    <!-- Appointmetns -->
+    <!-- Services -->
   <section class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4>Последние Записи на прием</h4>
+              <h4>Услуги</h4>
             </div>
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th>Дата cоздания</th>
+                  <th>№</th>
+                  <th>Клиент</th>
                   <th>Телефон</th>
-                  <th>Пользователь</th>
-                  <th>Услуга</th>
-                  <th>Формат</th>
+                  <th>Сообщение</th>
                   
                 </tr>
               </thead>
               <tbody>
-                {% for appointment in appointments %}
+                {% for record in records %}
                     <tr>
-                    <td>{{ appointment.purchase_date }}</td>
-                    <td>{{ appointment.phone }}</td>
-                    <td>{{ appointment.customerName }}</td>
-                    <td>{{ appointment.serviceName }}</td>
-                    <td>{{ appointment.format }}</td>
+                        <td>{{ record.customersMessagesId }}</td>
+                        <td>{{ record.name }}</td>
+                        <td>{{ record.phone }}</td>
+                        <td>{{ record.message }}</td>
+                    
                     
                     </tr>
                 {% endfor %}

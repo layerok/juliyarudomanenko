@@ -35,6 +35,20 @@ class Message extends \Core\Model
             $this->$key = $value;
         };
     }
+    public static function getAll(){
+        $sql = "SELECT *,
+                customer_messages.id AS customersMessagesId
+                FROM customer_messages
+                    LEFT JOIN customers
+                        ON customer_messages.customer_id = customers.id
+                ORDER BY customer_messages.id DESC";
+
+        $db = static::getDB();
+        $stmt = $db->query($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        return $stmt->fetchAll();
+    }
 
     /**
      * Validate current property values, adding valiation error messages to the errors array property

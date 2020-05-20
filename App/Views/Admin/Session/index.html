@@ -1,0 +1,50 @@
+{% set page = "service"%}
+{% extends "admin/base.html" %}
+
+{% block title %}Услуги{% endblock %}
+
+{% block footer%} 
+
+{% endblock %}
+
+{% block body %}
+    <!-- Services -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Услуги</h4>
+            </div>
+            <table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>№</th>
+                  <th>Название</th>
+                  <th>Стоимость</th>
+                  <th>Продолжительность</th>
+                  <th>Описание</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for record in records %}
+                    <tr>
+                    <td>{{ record.id }}</td>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.price ~ record.currency }}</td>
+                    <td>{{ record.duration }}</td>
+                    <td>{{ record.description }}</td>
+                    
+                    </tr>
+                {% endfor %}
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,7 +1,7 @@
-
+{% set page = "login"%}
 {% extends "admin/base.html" %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}Вход{% endblock %}
 
 {% block footer%} 
 
@@ -10,16 +10,6 @@
 {% block body %}
 
 <section class="section container">
-    <h1>Вход</h1>
-    {% if admin.errors is not empty %}
-        <div class="p-2 border my-4">
-            
-            {% for error in admin.errors %}
-                <div class="text-danger">{{ error }}</div>
-            {% endfor %}
-        </div>
-
-    {% endif %}
 
     <form  method="post" action="/admin/login/create">
         <div class="form-group">
@@ -30,7 +20,7 @@
             <label for="inputPassword">Пароль</label>
             <input class="form-control" type="password" id="inputPassword" name="password" placeholder="Пароль">
         </div>
-        <button class="btn btn-light " type="submit">Войти</button>
+        <button class="btn btn-primary " type="submit">Войти</button>
         
     </form>
 </section>

@@ -1,0 +1,26 @@
+html{
+    height:100%;
+}
+
+/** Page **/
+.page{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    font-family:'Open Sans', sans-serif!important;
+}
+.page__main{
+    flex-grow:1;
+}
+
+/** Footer **/
+.footer{
+    height:50px;
+}
+.copyright{
+    color:var(--secondary);
+    font-size:12px;
+}
+.section{
+    margin-top:90px;
+}

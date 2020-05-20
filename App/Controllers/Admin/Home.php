@@ -3,13 +3,18 @@
 namespace App\Controllers\Admin;
 
 use \Core\View;
+use \App\Models\Appointment;
 
 class Home extends Authenticated
 {
 
     public function indexAction()
     {
-        View::renderTemplate('/admin/home/index.html');
+        
+        $appointments = Appointment::getAll(); 
+        View::renderTemplate('/admin/home/index.html',[
+            'appointments' => $appointments
+        ]);
     }
 
 }

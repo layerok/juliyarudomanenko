@@ -1,56 +1,68 @@
-<header class="header">
-    <div class="secondary-nav container-fluid bg-lighter  d-none d-md-flex ">
-        
-            
-        <div class="offset-lg-4 offset-md-2 col-lg-3 col-md-4 col-sm-5">
-            <div class="phone">
-                <div class="phone__inner d-flex align-items-center">
-                    <i class="phone__icon fas fa-phone"></i>
-                    <span class="phone__number ml-1">+38(067)830-0340</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5 col-md-6 ">
-            <nav class="nav h-100 pb-1 justify-content-end px-2">
-                <a href="/admin" class="nav-link align-self-center text-white{% if page == 'science_articles' %} active {% endif %}">Научные статьи</a>
-                <a href="/admin" class="nav-link align-self-center text-white{% if page == 'certificates' %} active {% endif %}">Сертификаты</a>
-                {% if current_admin %}
-                    <a class="nav-link align-self-center text-white" href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>
-                {% else %}
-                    <a class="nav-link align-self-center text-white" href="/admin/login"><i class="far fa-user"></i> Войти</a> 
-                {% endif %}
-            </nav>
-        </div>
-                       
-    </div>
-    <div class="main-nav container-fluid bg-light border-bottom border-primary">
-        
-            <nav class="navbar navbar-expand-md navbar-dark px-0 px-md-2">
-                <a class="navbar-brand" href="/admin">
-                    <h2 class="navbar-brand__name h1 text-white">Управление содержимым</h2>
-                    <h5 class="navbar-brand__position h5">Психолог, психотерапевт</h5>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon "></span>
-                </button>
-              
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <nav class="navbar-nav ml-auto ">
-                    <a class="nav-link text-white{% if page == 'home' %} active {% endif %}" href="/admin">Главная </a>
-                    <a class="nav-link text-white{% if page == 'service' %} active {% endif %}" href="/admin/service/index">Услуги</a>
-                    <a class="nav-link text-white{% if page == 'about' %} active {% endif %}" href="/admin">Обо мне</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="nav-link text-white d-md-none{% if page == 'science_articles' %} active {% endif %}" href="/" >Научные статьи</a>
-                    <a class="nav-link text-white d-md-none{% if page == 'certificates' %} active {% endif %}" href="/" >Сертификаты</a>
-                    {% if current_admin %}
-                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Выход</a>
-                    {% else %}
-                        <a class="nav-link align-self-end text-white d-md-none" href="/admin/login"><i class="far fa-user"></i> Войти</a> 
-                    {% endif %}
-                  </ul>
-                </div>
-              </nav>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+    <div class="container">
+      <a href="/admin" class="navbar-brand">Юлия Рудоманенко</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       
-        
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        {% if current_admin %}
+          <ul class="navbar-nav">
+            <li class="nav-item px-2">
+              <a href="/admin" class="nav-link {% if page == 'home' %} active {% endif %}">Панель Управления</a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="/admin/session/index" class="nav-link {% if page == 'service' %} active {% endif %}">Услуги</a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="/admin/feedback/index" class="nav-link {% if page == 'message' %} active {% endif %}">Сообщения</a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="/admin/comment/index" class="nav-link {% if page == 'comment' %} active {% endif %}">Комментарии</a>
+            </li>
+          </ul>
+        {% endif %}
+
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+            {% if current_admin %}
+              <a href="/admin/logout" class="nav-link">
+                <i class="fas fa-user-times"></i> Выход
+              </a>
+            {% else %}
+              <a href="/admin/login" class="nav-link">
+                <i class="fas fa-user"></i> Вход
+              </a>
+            {% endif %}
+            
+          </li>
+        </ul>
+      </div>
     </div>
-</header>
+  </nav>
+
+  <!-- HEADER -->
+  <header id="main-header" class="py-2 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          
+          <h1>
+            {% if page == "login" %}
+              <i class="fas fa-user"></i> Вход
+            {% elseif page == "home" %}
+              <i class="fas fa-cog"></i> Панель Управления
+            {% elseif page == "service" %}
+              <i class="fas fa-notes-medical"></i> Услуги
+            {% elseif page == "message" %}
+              <i class="fas fa-envelope"></i> Сообщения
+            {% elseif page == "comment" %}
+              <i class="fas fa-comment"></i></i> Комментарии
+            {% endif %}
+            
+          </h1>
+        </div>
+      </div>
+    </div>
+  </header>
