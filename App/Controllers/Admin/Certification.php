@@ -12,7 +12,7 @@ class Certification extends Authenticated
 {
     public $per_page_limit = 10;
     public $max_page_count = 5;
-    
+     
     public function indexAction()
     {
 

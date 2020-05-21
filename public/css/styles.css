@@ -1,6 +1,9 @@
 html{
     height:100%;
 }
+ul{
+    padding-left:23px;
+}
 .h1{
     font-family: 'Russo One', sans-serif;
     font-size:32px;

@@ -36,6 +36,7 @@ $router->add('admin', ['controller' => 'Home', 'action' => 'index', 'namespace' 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 
 $router->add('{controller}/{action}');
+$router->add('{controller}/{action}/{page:[\d]+}');
 $router->add('{controller}/{id:[\d]+}/{action}');
 
 $router->add('admin/{controller}/{action}',['namespace' => 'Admin']);

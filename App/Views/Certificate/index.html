@@ -14,23 +14,63 @@
     
 
 {% block body %}
-<section class="section container">
-    <div class="row">
-        <div class="col">
-            <h1 class="h1">Сертификаты</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
+<!-- Certificates -->
+<section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Сертификаты</h4>
+            </div>
+            <table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Название</th>
+                </tr>
+              </thead>
+              <tbody>
                 {% for record in records %}
-                    <div>
-                        <a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a>
-                    </div>
+                    <tr>
+                        <td>{{ record.rowId }}</td>
+                        <td><a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
+                    
+                    </tr>
                 {% endfor %}
+                
+              </tbody>
+            </table>
+            <!-- PAGINATION -->
+            <nav class="ml-4">
+              <ul class="pagination">
+                {% if pages.prev %}
+                <li class="page-item ">
+                  <a href="/certification/index/{{ pages.prev }}" class="page-link">&lt;</a>
+                </li>
+                {% endif %}
+
+              {% for page in pages.pages %}
+                <li class="page-item{% if pages.current == page %} active{% endif%}">
+                  <a href="/certification/index/{{ page }}" class=" page-link">{{ page }}</a>
+                </li>
+              {% endfor %}
+              {% if pages.next %}
+                <li class="page-item">
+                  <a href="/certification/index/{{ pages.next }}" class="page-link">&gt;</a>
+                </li>
+                <li class="page-item">
+                  <a href="/certification/index/{{ pages.last }}" class="page-link">&gt;&gt;</a>
+                </li>
+              </ul>
+              {% endif %}
+            </nav>
+          </div>
         </div>
+        
+      </div>
     </div>
-    
-</section>
+  </section>
 
 
 {% endblock %}
