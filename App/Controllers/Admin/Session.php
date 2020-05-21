@@ -29,7 +29,7 @@ class Session extends Authenticated
         if(isset($id)){
             
             $service = new Service(); 
-            $service = $service->getService($id);
+            $service = $service->getOne($id);
             
             View::renderTemplate('/admin/session/edit.html',[
                 'record' => $service

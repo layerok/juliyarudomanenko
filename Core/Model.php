@@ -32,4 +32,9 @@ abstract class Model
 
         return $db;
     }
+    protected function deleteFile($path){
+        if(file_exists($_SERVER['DOCUMENT_ROOT'].$path)){
+            unlink($_SERVER['DOCUMENT_ROOT'].$path);
+        }
+    }
 }

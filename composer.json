@@ -1,7 +1,10 @@
 {
     "require": {
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "verot/class.upload.php": "^2.0"
+        
     },
+    
     "autoload": {
         "psr-4": {
              "Core\\": "Core/",

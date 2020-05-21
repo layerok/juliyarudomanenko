@@ -40,7 +40,7 @@ class Appointment extends \Core\Controller
         if(isset($id)){
             
             $service = new Service();
-            $service = $service->getService($id);
+            $service = $service->getOne($id);
             $service->description = htmlspecialchars_decode($service->description);
             
             if($service){
@@ -69,7 +69,7 @@ class Appointment extends \Core\Controller
         if(isset($id)){
             
             $service = new Service();
-            $service = $service->getService($id);
+            $service = $service->getOne($id);
             if($service){
                 View::renderTemplate('Appointment/close-the-deal.html',[
                     'service'=> $service
@@ -93,7 +93,7 @@ class Appointment extends \Core\Controller
         if(isset($id)){
             
             $service = new Service();
-            $service = $service->getService($id);
+            $service = $service->getOne($id);
             
             if($service){
 

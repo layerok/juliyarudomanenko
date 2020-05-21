@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use PDO;
-use \App\Upload;
+use \Verot\Upload\Upload;
 
 /**
  * Example user model
@@ -116,36 +116,39 @@ class Certificate extends \Core\Model
 
     public function validate($id = null){
         if(empty($this->name)){
-            $this->errors[] = "Введите 'Название' услуги";
+            $this->errors[] = "Введите 'Название' Сертификата";
         }
-        if (!empty($this->files['image']['tmp_name'][0])){
+        $handle = new Upload($this->files['image'], 'ru_RU');
+        $handle->allowed = array('image/*');
 
-            $this->image = new Upload($this->files['image']);
+        if ($handle->uploaded) {
 
-            if(empty($this->erorrs)){
-
-                if($this->image->save($this->path)){
+            if(empty($this->errors)){
+                $handle->image_resize   = true;
+                $handle->image_ratio_y  = true;
+                $handle->image_x        = 720;
+                $handle->process($_SERVER['DOCUMENT_ROOT'].$this->path);
+                if($handle->processed){
                     if(!empty($id)){
                         $record = $this->getOne($id);
-                        Upload::delete($this->path.$record->image);
+                        $this->deleteFile($this->path.$record->image);
                     }
-                    
-                    $this->image_name = $this->image->image_name;
+                    $this->image_name = $handle->file_dst_name;
                 }else{
-                    $this->errors[] = $this->image->errors[0];
+                    $this->errors[] = $handle->error;
                 }
-
-            } 
+            }
 
         }else{
-
             if(!empty($id)){
                 $record = $this->getOne($id);
                 $this->image_name = $record->image;
             }else{
-                $this->errors[] = "Файл не был загружен";
+                $this->errors[] = $handle->error;
             }
         }
+
+    
         
         
     }
@@ -158,7 +161,7 @@ class Certificate extends \Core\Model
     {
         
         $record = $this->getOne($id);
-        Upload::delete($this->path.$record->image);
+        $this->deleteFile($this->path.$record->image);
 
         $sql = "DELETE FROM certificates 
                 WHERE id = :id";

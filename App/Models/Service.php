@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use PDO;
-use \App\Upload;
+use \Verot\Upload\Upload;
+
 
 
 /**
@@ -51,7 +52,7 @@ class Service extends \Core\Model
      *
      * @return array
      */
-    public function getService($id)
+    public function getOne($id)
     {
         $sql = "SELECT * FROM services
                 WHERE id = :id";
@@ -140,36 +141,37 @@ class Service extends \Core\Model
         if(empty($this->description)){
             $this->errors[] = "Введите 'Описание' услуги";
         }
-        if (!empty($this->files['image']['tmp_name'][0])){
 
-            $this->image = new Upload($this->files['image']);
+        $handle = new Upload($this->files['image'], 'ru_RU');
+        $handle->allowed = array('image/*');
 
-            if(empty($this->erorrs)){
+        if ($handle->uploaded) {
 
-                if($this->image->save()){
+            if(empty($this->errors)){
+                $handle->image_resize   = true;
+                $handle->image_ratio_y  = true;
+                $handle->image_x        = 360;
+                $handle->process($_SERVER['DOCUMENT_ROOT'].$this->path);
+                if($handle->processed){
                     if(!empty($id)){
-                        $service = $this->getService($id);
-                        Upload::delete($this->path.$service->image);
+                        $record = $this->getOne($id);
+                        $this->deleteFile($this->path.$record->image);
                     }
-                    
-                    $this->image_name = $this->image->image_name;
+                    $this->image_name = $handle->file_dst_name;
                 }else{
-                    $this->errors[] = $this->image->errors[0];
+                    $this->errors[] = $handle->error;
                 }
-
-            } 
+            }
 
         }else{
-
             if(!empty($id)){
-                $service = $this->getService($id);
-                $this->image_name = $service->image;
+                $record = $this->getOne($id);
+                $this->image_name = $record->image;
             }else{
-                $this->errors[] = "Файл не был загружен";
+                $this->errors[] = $handle->error;
             }
         }
-        
-        
+
     }
     /**
      * delete service by id as an associative array
@@ -179,9 +181,8 @@ class Service extends \Core\Model
     public function delete($id)
     {
         
-        $service = $this->getService($id);
-        Upload::delete($this->path.$service->image);
-
+        $record= $this->getOne($id);
+        $this->deleteFile($this->path.$record->image);
         $sql = "DELETE FROM services 
                 WHERE id = :id";
         $db = static::getDB();
