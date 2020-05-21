@@ -6,15 +6,32 @@ use \Core\View;
 use \App\Models\Certificate; 
 use \App\Request;
 use \App\Flash;
+use \App\Paginator;
 
 class Certification extends Authenticated
 {
-
+    public $per_page_limit = 10;
+    public $max_page_count = 5;
+    
     public function indexAction()
     {
+
+        $page = isset($this->route_params['page']) ? (int)$this->route_params['page'] : 1;
         $records = Certificate::getAll();
+
+        $paginator = new Paginator();
+        $pages = $paginator->setCurrentPage($page)
+                                    ->setRecordsCount(count($records))
+                                    ->setPerPageLimit($this->per_page_limit)
+                                    ->setMaxPageCount($this->max_page_count)
+                                    ->getPages();
+
+        $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
+        
+        
         View::renderTemplate('/admin/certificate/index.html',[
-            'records' => $records
+            'records' => $updatedRecords,
+            'pages' => $pages
         ]);
     }
 

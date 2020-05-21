@@ -40,6 +40,8 @@ $router->add('{controller}/{id:[\d]+}/{action}');
 
 $router->add('admin/{controller}/{action}',['namespace' => 'Admin']);
 $router->add('admin/{controller}/{id:[\d]+}/{action}',['namespace' => 'Admin']);
+$router->add('admin/{controller}/{id:[\d]+}/{action}/{page:[\d]+}',['namespace' => 'Admin']);
+$router->add('admin/{controller}/{action}/{page:[\d]+}',['namespace' => 'Admin']);
 
 
 

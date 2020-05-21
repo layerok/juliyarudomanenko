@@ -62,6 +62,30 @@
                 
               </tbody>
             </table>
+            <!-- PAGINATION -->
+            <nav class="ml-4">
+              <ul class="pagination">
+                {% if pages.prev %}
+                <li class="page-item ">
+                  <a href="/admin/session/index/{{ pages.prev }}" class="page-link">&lt;</a>
+                </li>
+                {% endif %}
+
+              {% for page in pages.pages %}
+                <li class="page-item{% if pages.current == page %} active{% endif%}">
+                  <a href="/admin/session/index/{{ page }}" class=" page-link">{{ page }}</a>
+                </li>
+              {% endfor %}
+              {% if pages.next %}
+                <li class="page-item">
+                  <a href="/admin/session/index/{{ pages.next }}" class="page-link">&gt;</a>
+                </li>
+                <li class="page-item">
+                  <a href="/admin/session/index/{{ pages.last }}" class="page-link">&gt;&gt;</a>
+                </li>
+              </ul>
+              {% endif %}
+            </nav>
           </div>
         </div>
        

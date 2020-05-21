@@ -6,15 +6,30 @@ use \Core\View;
 use \App\Models\Service;
 use \App\Request;
 use \App\Flash;
+use \App\Paginator;
 
 class Session extends Authenticated
 {
+    public $per_page_limit = 10;
+    public $max_page_count = 10;
 
     public function indexAction()
     {
-        $services = Service::getAll();
+        $page = isset($this->route_params['page']) ? (int)$this->route_params['page'] : 1;
+        $records = Service::getAll();
+
+        $paginator = new Paginator();
+        $pages = $paginator->setCurrentPage($page)
+                                    ->setRecordsCount(count($records))
+                                    ->setPerPageLimit($this->per_page_limit)
+                                    ->setMaxPageCount($this->max_page_count)
+                                    ->getPages();
+
+        $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
+
         View::renderTemplate('/admin/session/index.html',[
-            'records' => $services
+            'records' => $updatedRecords,
+            'pages' => $pages
         ]);
     }
 

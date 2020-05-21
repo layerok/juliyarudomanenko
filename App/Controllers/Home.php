@@ -15,10 +15,7 @@ use \App\Models\FacebookComment;
  */
 class Home extends \Core\Controller
 {
-    public $facebook_comment;
-    public $facebook_comments;
-    public $service;
-    public $services;
+
 
     public function before(){
         $this->facebook_comment = new FacebookComment();

@@ -5,16 +5,30 @@ namespace App\Controllers\Admin;
 use \Core\View;
 use \App\Models\Appointment;
 use \App\Flash;
+use \App\Paginator;
 
 class Home extends Authenticated
 {
+    public $per_page_limit = 10;
+    public $max_page_count = 10;
 
     public function indexAction()
     {
-        
-        $appointments = Appointment::getAll(); 
+        $page = isset($this->route_params['page']) ? (int)$this->route_params['page'] : 1;
+        $records = Appointment::getAll();
+
+        $paginator = new Paginator();
+        $pages = $paginator->setCurrentPage($page)
+                                    ->setRecordsCount(count($records))
+                                    ->setPerPageLimit($this->per_page_limit)
+                                    ->setMaxPageCount($this->max_page_count)
+                                    ->getPages();
+
+        $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
+         
         View::renderTemplate('/admin/home/index.html',[
-            'appointments' => $appointments
+            'appointments' => $updatedRecords,
+            'pages' => $pages
         ]);
     }
 
