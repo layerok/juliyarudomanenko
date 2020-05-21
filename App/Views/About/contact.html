@@ -17,18 +17,21 @@
 <section class="section container">
     <div class="row">
         <div class="col">
-            <h1 class="h1">Контакты</h1>
+            <h1 class="h1">Главная информация</h1>
+            <p>Пожалуйста используйте телефонный номер чтобы быстро получить обратную связь. Или же не стесняйтесь оставить сообщения через сайт. </p>
         </div>
-    </div>
-    <div class="row">
         <div class="col">
-                {% for record in records %}
-                    <div>
-                        <a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a>
-                    </div>
-                {% endfor %}
+            <h1 class="h1">Контактная информация</h1>
+            <ul class="mt-3 list-unstyled ">
+                <li class="mt-2" ><i class="fas fa-phone"></i><a href="tel:0678300340"> +38(067)830-0340</a></li>
+                <li class="mt-2" ><i class="fas fa-envelope"></i><a href="mailto:juliarud19.75@gmail.com"> juliarud19.75@gmail.com</a> </li>
+                <li class="mt-2" ><i class="fab fa-facebook"></i><a href="https://www.facebook.com/profile.php?id=100014064605939"> facebook</a></li>
+                <li class="mt-2" ><i class="fab fa-skype"></i> juliya_rudomanenko</a></li>
+              </ul>
         </div>
+        
     </div>
+
     
 </section>
 

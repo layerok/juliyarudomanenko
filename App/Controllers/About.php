@@ -22,11 +22,7 @@ class About extends \Core\Controller
         View::renderTemplate('About/index.html');
     }
 
-/**
-     * Show the index page
-     *
-     * @return void
-     */
+
     public function contactAction()
     {
         View::renderTemplate('About/contact.html');

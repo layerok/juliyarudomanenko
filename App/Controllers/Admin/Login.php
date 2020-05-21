@@ -65,7 +65,7 @@ class Login extends \Core\Controller {
     {
         Flash::addMessage('Выход выполнен!');
 
-        $this->redirect('/admin/login/index');
+        $this->redirect('/');
     }
 
 }
