@@ -13,7 +13,8 @@
                 <div class="col-lg-5 col-md-6 ">
                     <nav class="nav h-100 pb-1 justify-content-end px-2">
                         <a href="/certification/index" class="nav-link align-self-center text-white{% if page == 'certificate' %} active {% endif %}">Образование</a>
-                        <a href="/admin/login" class="nav-link align-self-center text-white" target="_blank"><i class="fas fa-user"></i> Вход</a>
+                        <a href="/about/contact"         class="nav-link text-white align-self-center{% if page == 'contact' %} active {% endif %}"  >Контакты</a>
+                        <a href="/admin/login"         class="nav-link align-self-center text-white" target="_blank"><i class="fas fa-user"></i> Вход</a>
                     </nav>
                 </div>
                        
@@ -35,6 +36,7 @@
                     <a class="nav-link text-white{% if page == 'online_appointment' %} active {% endif %}" href="/appointment/index">Записаться</a>
                     <a class="nav-link text-white{% if page == 'about' %} active {% endif %}" href="/about/index">Обо мне</a>
                     <div class="dropdown-divider"></div>
+                    <a class="nav-link text-white d-md-none{% if page == 'contact' %} active {% endif %}" href="/about/contact" >Контакты</a>
                     <a class="nav-link text-white d-md-none{% if page == 'certificate' %} active {% endif %}" href="/certification/index" >Образование</a>
                     <a href="/admin/login" class="nav-link text-white d-md-none" target="_blank"><i class="fas fa-user"></i> Вход</a>
                   </ul>

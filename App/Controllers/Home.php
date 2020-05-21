@@ -35,6 +35,8 @@ class Home extends \Core\Controller
             "facebook_comments" => $this->facebook_comments
             ]);
     }
+    
+    
 
     /**
      * Send message

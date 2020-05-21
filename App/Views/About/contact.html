@@ -1,0 +1,36 @@
+{% set page = "contact"%}
+{% extends "base.html" %}
+
+{% block title %}Контакты{% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block footer%} 
+
+
+{% endblock %}
+    
+    
+
+{% block body %}
+<section class="section container">
+    <div class="row">
+        <div class="col">
+            <h1 class="h1">Контакты</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+                {% for record in records %}
+                    <div>
+                        <a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+    
+</section>
+
+
+{% endblock %}
