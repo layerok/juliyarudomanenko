@@ -8,7 +8,40 @@
     <div id="fb-root"></div>
     <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
+    <script src="/js/plugins/loadMoreResults.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.services .loadMore').loadMoreResults({
+                displayedItems:2,
+                showItems: 2,
+                button: {
+                    'class': 'btn btn-light',
+                    'text': 'Показать еще'
+                },
+                tag:{
+                    name: 'div',
+                    class: 'row'
+                }
+                
+            });
+            $('.comments .loadMore').loadMoreResults({
+                displayedItems:2,
+                showItems: 2,
+                button: {
+                    'class': 'btn btn-light',
+                    'text': 'Показать еще'
+                },
+                tag:{
+                    name: 'div',
+                    class: 'item'
+                }
+                
+            });
+        });
+    </script>
     <script src="/js/homeFormValidation.js"></script>
+    
+
 {% endblock %}
 
 {% block body %}

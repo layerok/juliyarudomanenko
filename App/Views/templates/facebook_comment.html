@@ -1,14 +1,14 @@
 {% if facebook_comments %}
-    <section class="comments section container">
+    <section class="comments section container d-flex flex-column">
         <div class="row">
             <div class="col text-center">
                 <h2 class="h1 mb-4">Отзывы</h2>
             </div>
         </div>
-        <div class="row">
+        <div class="row loadMore">
             
             {% for facebook_comment in facebook_comments %}
-                <div class="col-lg-6 mb-4">
+                <div class="item col-lg-6 mb-4">
                     <div class="fb-comment-embed"
                     data-href="{{ facebook_comment.link }}"
                     data-width="540"></div>

@@ -20,7 +20,7 @@
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th>№</th>
+                  <th>#</th>
                   <th>Клиент</th>
                   <th>Телефон</th>
                   <th>Сообщение</th>
@@ -30,7 +30,7 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                        <td>{{ record.customersMessagesId }}</td>
+                        <td>{{ record.rowId }}</td>
                         <td>{{ record.name }}</td>
                         <td>{{ record.phone }}</td>
                         <td>{{ record.message }}</td>

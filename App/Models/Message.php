@@ -37,6 +37,7 @@ class Message extends \Core\Model
     }
     public static function getAll(){
         $sql = "SELECT *,
+                row_number() OVER (ORDER BY customer_messages.id) as rowId,
                 customer_messages.id AS customersMessagesId
                 FROM customer_messages
                     LEFT JOIN customers

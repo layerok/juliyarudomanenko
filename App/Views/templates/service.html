@@ -1,12 +1,13 @@
 {% if services %}
-    <section id="services" class="services section container">
+    <section id="services" class="services section container d-flex flex-column">
         <div class="row">
             <div class="col text-center">
                 <h2 class="h1 mb-0">Услуги</h2>
             </div>
         </div>
+        <div class="loadMore">
         {% for service in services %}
-            <div class="row mt-4">
+            <div class="row mt-4 ">
                 <div class="col-md-3 mb-2">
                     <img src="{{ service.path ~ service.image}}" alt="" class="d-none d-md-flex img-fluid">
                 </div>
@@ -40,5 +41,6 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
     </section>
 {% endif %}

@@ -35,7 +35,9 @@ class Certificate extends \Core\Model
      */
     public static function getAll()
     {
-        $sql ="SELECT * FROM certificates";
+        $sql =" SELECT *,
+                        row_number() OVER (ORDER BY id) as rowId
+                FROM certificates";
 
         $db = static::getDB();
         $stmt = $db->query($sql);
