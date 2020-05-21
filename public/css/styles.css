@@ -73,8 +73,10 @@ a:hover{
 .border-primary{
     border-color: var(--primary)!important;
 }
-.border-light{
-    border-color: var(--light)!important;
+.border-light-bottom{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--light)!important;
 }
 .border-lighter{
     border-color: var(--lighter)!important;

@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Request;
+use \App\Models\Message;
 
 /**
  * About controller
@@ -26,5 +28,34 @@ class About extends \Core\Controller
     public function contactAction()
     {
         View::renderTemplate('About/contact.html');
+    }
+
+    /**
+     * Send message
+     *
+     * @return void
+     */
+    public function sendAction()
+    {
+        if(Request::isPost()){
+            $message = new Message($_POST);
+            $message->save();
+            if(Request::isAjax()){
+                $response = [
+                    "errors" => $message->errors
+                ];
+                echo json_encode($response);
+
+            }else{
+                View::renderTemplate('About/contact.html',[
+                    "errors" => $message->errors,
+                    "post_data" => $_POST
+                ]);
+
+            }
+
+        }
+        
+            
     }
 }

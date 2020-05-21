@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% block footer%} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="/js/homeFormValidation.js"></script>
 
 
 {% endblock %}
@@ -16,12 +19,53 @@
 {% block body %}
 <section class="section container">
     <div class="row">
-        <div class="col">
+        <div class="col mb-3">
             <h1 class="h1">Главная информация</h1>
-            <p>Пожалуйста используйте телефонный номер чтобы быстро получить обратную связь. Или же не стесняйтесь оставить сообщения через сайт. </p>
+            <p>Пожалуйста звоните мне по телефону чтобы быстро со мной связаться. Или же не стесняйтесь оставить сообщения через сайт. </p>
+            {% if errors %}
+                <div class="p-2 border my-4">
+                    
+                    {% for error in errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+            {% endif %}
+        
+            <form name="messageForm" id="message-form" action="/about/send" method="post" >
+                <div class="form-group">
+                  <label for="name">Имя:<abbr class="text-danger">*</abbr></label>
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя" 
+                  value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
+                  <div class="invalid-feedback">Введите имя</div>
+                  <div class="valid-feedback">Выглядит хорошо</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон:<abbr class="text-danger">*</abbr></label>
+                    <input type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
+                    value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
+                    <div class="invalid-feedback">Укажите верный телефон</div>
+                    <div class="valid-feedback">Выглядит хорошо</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="message">Сообщение:</label>
+                    <textarea class="form-control " name="message" id="message" placeholder="Кратко опишите вашу проблему" >{% if post_data.message %}{{ post_data.message }}{% endif%}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="form__recaptcha">
+                        <div class="g-recaptcha" data-sitekey="6Lcgh_oUAAAAAIPl1cgjobXZD1FJwjzY2ag_AIKk"></div>
+                        <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не робот!</div>
+                    </div>
+                </div>
+                <input id="close-the-deal-btn" type="submit" name="submit" class="btn btn-light" value="Отправить">
+                <div class="form-group my-3">
+                    <p class="confirmation text-success text-center" style="display:none">Спасибо! Ваше сообщение отправлено!</p>
+                </div>
+              </form>
+        
         </div>
-        <div class="col">
-            <h1 class="h1">Контактная информация</h1>
+        <div class=" offset-md-1 col">
+            <h1 class="h3">Контактная информация</h1>
             <ul class="mt-3 list-unstyled ">
                 <li class="mt-2" ><i class="fas fa-phone"></i><a href="tel:0678300340"> +38(067)830-0340</a></li>
                 <li class="mt-2" ><i class="fas fa-envelope"></i><a href="mailto:juliarud19.75@gmail.com"> juliarud19.75@gmail.com</a> </li>
@@ -34,6 +78,7 @@
 
     
 </section>
+
 
 
 {% endblock %}
