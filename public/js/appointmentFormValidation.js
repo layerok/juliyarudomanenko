@@ -84,14 +84,18 @@ $( document ).ready(function() {
                 dataType: 'json',
                 success: function(data){
                     if(data.errors.length == 0){
+                        $('#recaptchaError').hide();
                         setUndefined([phoneInput,nameInput]);
                         clearValue([phoneInput,nameInput]);
-                        
+                        grecaptcha.reset();
                         isPhoneValid = false;
                         isNameValid = false;
                         window.location.href = "/appointment/thank-you";
                     }else{
-                        alert("Возникла ошибка. Попробуйте еще раз");
+                        if(data.errors.hasOwnProperty('recaptcha_failed')){
+                            $('#recaptchaError').show();
+                        }
+                        grecaptcha.reset();
                     }
                     
                 },
@@ -106,6 +110,7 @@ $( document ).ready(function() {
             if(!isNameValid){
                 setInvalid(nameInput);
             }
+            
         } 
         
        

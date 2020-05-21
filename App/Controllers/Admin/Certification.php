@@ -29,7 +29,7 @@ class Certification extends Authenticated
         $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
         
         
-        View::renderTemplate('/admin/certificate/index.html',[
+        View::renderTemplate('/Admin/Certificate/index.html',[
             'records' => $updatedRecords,
             'pages' => $pages
         ]);
@@ -37,7 +37,7 @@ class Certification extends Authenticated
 
     public function addAction()
     {
-        View::renderTemplate('/admin/certificate/add.html');
+        View::renderTemplate('/Admin/Certificate/add.html');
     }
 
     public function editAction()
@@ -48,7 +48,7 @@ class Certification extends Authenticated
             $record = new Certificate(); 
             $record = $record->getOne($id);
             
-            View::renderTemplate('/admin/certificate/edit.html',[
+            View::renderTemplate('/Admin/Certificate/edit.html',[
                 'record' => $record
             ]);
         }else{
@@ -71,7 +71,7 @@ class Certification extends Authenticated
                 foreach($record->errors as $value){
                     Flash::addMessage($value,Flash::DANGER);
                 }
-                View::renderTemplate('/admin/certificate/add.html',[
+                View::renderTemplate('/Admin/Certificate/add.html',[
                     'post' => $_POST,
                     'files' => $_FILES
                 ]);
@@ -89,14 +89,14 @@ class Certification extends Authenticated
                 
                 if($record->saveChanges($id)){
                     Flash::addMessage("Изменения сохранены",Flash::SUCCESS);
-                    $this->redirect("/admin/certification/index");
+                    $this->redirect("admin/certification/index");
                 }else{
 
                     foreach($record->errors as $value){
                         Flash::addMessage($value,Flash::DANGER);
                     }
                     $record->id = $id;
-                    View::renderTemplate('/admin/certificate/edit.html',[
+                    View::renderTemplate('/Admin/Certificate/edit.html',[
                         'post' => $_POST,
                         'files' => $_FILES,
                         'record' => $record

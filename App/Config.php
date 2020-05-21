@@ -43,6 +43,16 @@ class Config
      * @var string
      */
     const CHAT_ID = "";
+     /**
+     * recaptcha site key 
+     * @var string
+     */
+    const SITE_KEY = "";
+     /**
+     * recaptcha secret key 
+     * @var string
+     */
+    const SECRET_KEY = "";
 
     /**
      * Show or hide error messages on screen

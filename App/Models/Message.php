@@ -31,8 +31,11 @@ class Message extends \Core\Model
      */
     public function __construct($data = []) 
     {
+        
         foreach($data as $key => $value) {
+            if($this->key = "g-recaptcha-response")
             $this->$key = $value;
+            
         };
     }
     public static function getAll(){
@@ -59,7 +62,7 @@ class Message extends \Core\Model
     public function validate()
     {
         // Name
-        if($this->name == '') {
+        if(empty($this->name)) {
             $this->errors[] = 'Введите имя';
         }
 
@@ -67,6 +70,30 @@ class Message extends \Core\Model
         if(!preg_match('/^\+?3?8?\(?0\d{2}\)?\-?\d{3}\-?\d{2}\d{2}$/',$this->phone)) {
             $this->errors[] = 'Введите телефон в формате +380xxxxxxx';
         }
+        if(Config::ENABLE_PRODUCTION){
+            if(empty($this->{'g-recaptcha-response'})){
+                // Флажок рекапчи не был отмечен
+               
+                $this->errors['recaptcha_failed'] = "Подтвердите, что вы не робот!";
+            }else{
+                
+                $verify = curl_init();
+                curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify?secret=".Config::SECRET_KEY."&response=".$this->{'g-recaptcha-response'});
+                curl_setopt($verify, CURLOPT_POST, true);
+                curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($verify);
+                $response = json_decode($response,true);
+                if($response['success'] == true){
+                    
+                }else{
+                    // ответ рекапчи не вернул success = true
+                    $this->errors['recaptcha_failed'] = "Ответ рекапчи не вернул успех";
+                }
+            }
+        }
+        
+        
     }
 
         /**

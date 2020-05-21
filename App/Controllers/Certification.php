@@ -11,7 +11,7 @@ class Certification extends \Core\Controller
     public function indexAction()
     {
         $records = Certificate::getAll();
-        View::renderTemplate('/certificate/index.html',[
+        View::renderTemplate('/Certificate/index.html',[
             'records' => $records
         ]);
     }

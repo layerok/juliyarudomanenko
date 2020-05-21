@@ -26,7 +26,7 @@ class Feedback extends Authenticated
 
         $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
 
-        View::renderTemplate('/admin/feedback/index.html',[
+        View::renderTemplate('/Admin/Feedback/index.html',[
             'records' => $updatedRecords,
             'pages' => $pages
         ]);

@@ -83,21 +83,28 @@ $( document ).ready(function() {
                 contentType: false,
                 dataType: 'json',
                 success: function(data){
+                    
                     if(data.errors.length == 0){
+                        $('#recaptchaError').hide();
                         setUndefined([phoneInput,nameInput]);
                         clearValue([phoneInput,nameInput,messageInput]);
                         
-                        
+                        grecaptcha.reset();
                         $(".confirmation").show().delay(2000).fadeOut();
                         isPhoneValid = false;
                         isNameValid = false;
                     }else{
+                        if(data.errors.hasOwnProperty('recaptcha_failed')){
+                            $('#recaptchaError').show();
+                        }else{
+                            grecaptcha.reset();
+                            
+                        }
                         
-                        alert("Возникла ошибка. Попробуйте еще раз");
                     }
                     
                 },
-                error: function(){
+                error: function(data){
                     alert("Возникла ошибка. Попробуйте еще раз!");
                 }
             });
@@ -108,6 +115,7 @@ $( document ).ready(function() {
             if(!isNameValid){
                 setInvalid(nameInput);
             }
+            
         }
         
        

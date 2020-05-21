@@ -26,7 +26,7 @@ class Home extends Authenticated
 
         $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
          
-        View::renderTemplate('/admin/home/index.html',[
+        View::renderTemplate('/Admin/Home/index.html',[
             'appointments' => $updatedRecords,
             'pages' => $pages
         ]);

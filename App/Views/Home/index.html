@@ -9,6 +9,7 @@
     <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
     <script src="/js/plugins/loadMoreResults.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         $(document).ready(function(){
             $('.services .loadMore').loadMoreResults({
@@ -99,6 +100,12 @@
                         <label for="message">Сообщение:</label>
                         <textarea class="form-control " name="message" id="message" placeholder="Кратко опишите вашу проблему" >{% if post_data.message %}{{ post_data.message }}{% endif%}</textarea>
                       </div>
+                      <div class="form-group">
+                        <div class="form__recaptcha">
+                            <div class="g-recaptcha" data-sitekey="6Lcgh_oUAAAAAIPl1cgjobXZD1FJwjzY2ag_AIKk"></div>
+                            <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не робот!</div>
+                        </div>
+                    </div>
                     <input id="close-the-deal-btn" type="submit" name="submit" class="btn btn-light" value="Отправить">
                     <div class="form-group my-3">
                         <p class="confirmation text-success text-center" style="display:none">Спасибо! Ваше сообщение отправлено!</p>

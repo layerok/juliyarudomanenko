@@ -27,7 +27,7 @@ class Session extends Authenticated
 
         $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
 
-        View::renderTemplate('/admin/session/index.html',[
+        View::renderTemplate('/Admin/Session/index.html',[
             'records' => $updatedRecords,
             'pages' => $pages
         ]);
@@ -35,7 +35,7 @@ class Session extends Authenticated
 
     public function addAction()
     {
-        View::renderTemplate('/admin/session/add.html');
+        View::renderTemplate('/Admin/Session/add.html');
     }
 
     public function editAction()
@@ -46,7 +46,7 @@ class Session extends Authenticated
             $service = new Service(); 
             $service = $service->getOne($id);
             
-            View::renderTemplate('/admin/session/edit.html',[
+            View::renderTemplate('/Admin/Session/edit.html',[
                 'record' => $service
             ]);
         }else{
@@ -69,7 +69,7 @@ class Session extends Authenticated
                 foreach($service->errors as $value){
                     Flash::addMessage($value,Flash::DANGER);
                 }
-                View::renderTemplate('/admin/session/add.html',[
+                View::renderTemplate('/Admin/Session/add.html',[
                     'post' => $_POST,
                     'files' => $_FILES
                 ]);
@@ -94,7 +94,7 @@ class Session extends Authenticated
                         Flash::addMessage($value,Flash::DANGER);
                     }
                     $service->id = $id;
-                    View::renderTemplate('/admin/session/edit.html',[
+                    View::renderTemplate('/Admin/Session/edit.html',[
                         'post' => $_POST,
                         'files' => $_FILES,
                         'record' => $service

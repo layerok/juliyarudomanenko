@@ -27,7 +27,7 @@ class Comment extends Authenticated
 
         $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
 
-        View::renderTemplate('/admin/facebook-comment/index.html',[
+        View::renderTemplate('/Admin/Facebook-comment/index.html',[
             'records' => $updatedRecords,
             'pages' => $pages
         ]);
@@ -35,7 +35,7 @@ class Comment extends Authenticated
 
     public function addAction()
     {
-        View::renderTemplate('/admin/facebook-comment/add.html');
+        View::renderTemplate('/Admin/Facebook-comment/add.html');
     }
 
     public function editAction()
@@ -46,7 +46,7 @@ class Comment extends Authenticated
             $record = new FacebookCommentModel(); 
             $record = $record->getOne($id);
             
-            View::renderTemplate('/admin/facebook-comment/edit.html',[
+            View::renderTemplate('/Admin/Facebook-comment/edit.html',[
                 'record' => $record
             ]);
         }else{
@@ -69,7 +69,7 @@ class Comment extends Authenticated
                 foreach($record->errors as $value){
                     Flash::addMessage($value,Flash::DANGER);
                 }
-                View::renderTemplate('/admin/facebook-comment/add.html',[
+                View::renderTemplate('/Admin/Facebook-comment/add.html',[
                     'post' => $_POST
                 ]);
                 
@@ -93,7 +93,7 @@ class Comment extends Authenticated
                         Flash::addMessage($value,Flash::DANGER);
                     }
                     $record->id = $id;
-                    View::renderTemplate('/admin/facebook-comment/edit.html',[
+                    View::renderTemplate('/Admin/Facebook-comment/edit.html',[
                         'post' => $_POST,
                         'record' => $record
                     ]);
@@ -112,7 +112,7 @@ class Comment extends Authenticated
             $record = new FacebookCommentModel(); 
             if($record->delete($id)){
                 Flash::addMessage("Комментарий удален",Flash::SUCCESS);
-                $this->redirect("/admin/comment/index");
+                $this->redirect("/Admin/Comment/index");
             }else{
                 Flash::addMessage("Возникла ошибка удаления записи. Обратитесь к разработчику",Flash::DANGER);
                 $this->redirect("/admin/comment/index");

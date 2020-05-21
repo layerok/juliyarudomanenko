@@ -6,6 +6,7 @@
 {% block footer%} 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
     <script src="/js/appointmentFormValidation.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 {% endblock %}
 
 {% block body %}
@@ -49,6 +50,12 @@
                         <div class="custom-control custom-radio">
                             <input type="radio" id="online" name="format" value="online" class="custom-control-input">
                             <label class="custom-control-label" for="online">Онлайн</label>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                        <div class="form__recaptcha">
+                            <div class="g-recaptcha" data-sitekey="6Lcgh_oUAAAAAIPl1cgjobXZD1FJwjzY2ag_AIKk"></div>
+                            <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не робот!</div>
                         </div>
                   </div>
                   <div class="form-group">

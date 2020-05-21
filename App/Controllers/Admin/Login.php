@@ -8,12 +8,24 @@ use \App\Auth;
 
 class Login extends \Core\Controller {
 
-
+    public function before(){
+        
+    }
     public function indexAction(){
-        View::renderTemplate("admin/login/index.html");
+        if(Auth::getAdmin()) {
+            Flash::addMessage('Вы уже авторизированы!', Flash::INFO);
+            
+            $this->redirect('/admin');
+        }
+        View::renderTemplate("Admin/Login/index.html");
     }
 
     public function createAction(){
+        if(Auth::getAdmin()) {
+            Flash::addMessage('Вы уже авторизированы!', Flash::INFO);
+            
+            $this->redirect('/admin');
+        }
         $user = Admin::authenticate($_POST['email'], $_POST['password']);
 
         if($user) {
@@ -26,7 +38,7 @@ class Login extends \Core\Controller {
         }else{
             
             Flash::addMessage('Вход не выполнен, попробуйте еще раз!',Flash::WARNING);
-            View::renderTemplate('admin/login/index.html',[
+            View::renderTemplate('Admin/Login/index.html',[
                 'email' => $_POST['email']
             ]);
         }
