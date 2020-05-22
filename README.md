@@ -1,5 +1,5 @@
 Features:
-  Self written MVC framework
+  Self written MVC framework,
   PDO statements
 
 Live example:
