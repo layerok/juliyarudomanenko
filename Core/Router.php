@@ -129,6 +129,7 @@ class Router
         } else {
             throw new \Exception('No route matched.', 404);
         }
+        
     }
 
     /**

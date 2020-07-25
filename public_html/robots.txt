@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /index.php
+Disallow: /login.php
+Disallow: /service.php
+Disallow: /service.php?service_id=7
+Disallow: /service.php?service_id=2
+Disallow: /service.php?service_id=9
+Disallow: /service.php?service_id=8
+Disallow: /service.php?service_id=6
+Disallow: /about.php
+Disallow: /offeringPage.php
+Disallow: /blog.php
+Disallow: /img/62720\xD0\xB1.jpg
+
+
+

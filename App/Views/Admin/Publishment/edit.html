@@ -1,0 +1,463 @@
+{% set page = "post"%}
+{% extends "Admin/base.html" %}
+
+{% block title %}Услуги{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.css" integrity="sha256-K4PK62zpbl/XelQ0bLxyUztMw5nLdGyd2qGmPTGM1oY=" crossorigin="anonymous" />
+{% endblock %}
+
+
+{% block body %}
+    <!-- ACTIONS -->
+  <section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <a href="/admin/publishment/index" class="btn btn-light btn-block">
+            <i class="fas fa-arrow-left"></i> Назад
+          </a>
+        </div>
+        <div class="col-md-3">
+          <button class="save btn btn-success btn-block">
+            <i class="fas fa-check"></i> Сохранить изменения
+          </button>
+        </div>
+        <div class="col-md-3">
+            <a href="/admin/publishment/{{ record.id }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="btn btn-danger btn-block">
+              <i class="fas fa-trash"></i> Удалить пост
+            </a>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <h4>Редактировать пост</h4>
+            </div>
+            <div class="card-body">
+
+              <form class="form" action="/admin/publishment/{{ record.id }}/save-changes" method="post" enctype="multipart/form-data" >
+                <div id="app">
+                  <div class="row">
+                    <div class=" offset-2 col-8 mb-4">
+                      <div class="list-group d-flex flex-row" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center" id="list-info" data-toggle="list" href="#info" role="tab" aria-controls="home">
+                          Содержание
+                          <span 
+                          v-if="title.msg.type== 'error'" 
+                          class="badge badge-pill badge-danger">Исправьте ошибку</span>
+                          <span 
+                          v-else-if="title.msg.type== 'warning'" 
+                          class="badge badge-pill badge-warning">Есть предупреждения</span>
+                          <span 
+                          v-else="title.msg.type== 'success'" 
+                          class="badge badge-pill badge-success">Все в порядке</span>
+                          
+
+                        </a>
+                        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-meta" data-toggle="list" href="#meta" role="tab" aria-controls="profile">
+                          Мета(Seo)
+                          <span 
+                          v-if="(slug.msg.type == 'error' && title.msg.type != 'error') || metaTitle.msg.type == 'error' || metaDescription.msg.type == 'error' " 
+                          class="badge badge-pill badge-danger">Исправьте ошибку</span></li>
+                          <span 
+                          v-else-if="((slug.msg.type == 'warning' || metaTitle.msg.type == 'warning' || metaDescription.msg.type == 'warning') && title.msg.type != 'error') " 
+                          class="badge badge-pill badge-warning">Есть предупреждения</span>
+                          <span 
+                          v-else
+                          class="badge badge-pill badge-success">Все в порядке</span>
+                          
+                           
+                        </a>
+                        
+                      </div>
+                    </div>
+                    <div class="offset-2 col-8">
+                      
+                      <div class="tab-content" id="nav-tabContent">
+                        <!-- Таб "Содержимое" -->
+                        <div class="tab-pane fade active show" id="info" role="tabpanel" aria-labelledby="info">
+
+                          <div class="form-group mb-4">
+                            <label for="title" class="h3">Заголовок</label>
+                            <input type="text" :class="['form-control', classes.controls[title.msg.type]]" name="title" value="{{ post.title }}" @input="generateSlug();generateMetaTitle(); generateMetaDescription(); validateTitle();" v-model="title.value" >
+                            <div :class="classes.feedback[title.msg.type]">{% verbatim %} {{ title.msg.text }} {% endverbatim%}</div>
+                          </div>
+                          <div class="form-group mb-4">
+                            <label for="image" class="h3">Изменить изображение</label>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="image" name="image" value="">
+                              <label for="image" class="custom-file-label" >Выберите изображение</label>
+                            </div>
+                            <small class="form-text text-muted">Max Size 3mb</small>
+                          </div>
+
+                        </div>
+                        <!-- Таб "meta(seo)"-->
+                        <div class="tab-pane fade " id="meta" role="tabpanel" aria-labelledby="meta">
+                          
+                          <!-- поле slug-->
+                          <div class="form-group mb-4">
+                            <label for="title" class="h3">Slug</label>
+                            <div :class="['input-group', classes.controls[slug.msg.type]]" >
+                              <input type="text" :class="['form-control', classes.controls[slug.msg.type]]" name="slug" value="{{ post.slug }}" @input=" validateSlug();" v-model="slug.value">
+                              
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" @click="generateSlug(); validateSlug();" data-toggle="tooltip" data-placement="top" title="Генерируется исходя из заголовка поста">Сгенерировать</button>
+                              </div>
+                            </div>
+                            <div :class="classes.feedback[slug.msg.type]">{% verbatim %} {{ slug.msg.text }} {% endverbatim%}</div>
+                            <small class="form-text "><span class="text-muted">то что будет отображаться в url. Пример: http://juliyarudomanenko.com/post/show/</span><span style="color: darkcyan" class="text-primary">zagolovok-stati</span></small>
+                          </div>
+                          <!-- поле meta-title-->
+                          <div class="form-group mb-4">
+                            <label for="title" class="h3">&lt;title&gt;</label>
+                            <div :class="['input-group', classes.controls[metaTitle.msg.type]]" >
+                              <input type="text" :class="['form-control', classes.controls[metaTitle.msg.type]]" name="meta_title" value="{{ post.meta-title }}" @input=" validateMetaTitle();" v-model="metaTitle.value">
+                              
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" @click="generateMetaTitle(); validateMetaTitle();" data-toggle="tooltip" data-placement="top" title="Генерируется исходя из заголовка поста">Сгенерировать</button>
+                              </div>
+                            </div>
+                            <div :class="classes.feedback[metaTitle.msg.type]">{% verbatim %} {{ metaTitle.msg.text }} {% endverbatim%}</div>
+                            <small class="form-text text-muted">отвечает за заголовок странице в поисковой выдаче </small>
+                          </div>
+                          <!-- поле meta-description-->
+                          <div class="form-group mb-4">
+                            <label for="title" class="h3">&lt;description&gt;</label>
+                            <div :class="['input-group', classes.controls[metaDescription.msg.type]]" >
+                              <input type="text" :class="['form-control', classes.controls[metaDescription.msg.type]]" name="meta_description" value="{{ post.meta_description }}" @input=" validateMetaDescription();" v-model="metaDescription.value">
+                              
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" @click="generateMetaDescription(); validateMetaDescription();" data-toggle="tooltip" data-placement="top" title="Генерируется исходя из заголовка поста">Сгенерировать</button>
+                              </div>
+                            </div>
+                            <div :class="classes.feedback[metaDescription.msg.type]">{% verbatim %} {{ metaDescription.msg.text }} {% endverbatim%}</div>
+                            <small class="form-text text-muted">отвечает за описание странице в поисковой выдаче</small>
+                          </div>
+                          
+                        </div>
+                        
+                      </div>
+                    </div>
+                     
+
+                  </div>
+                  <!-- Вне табов -->
+                </div>
+                <!-- вне Vue-->
+
+                <div class="row">
+                  <div class="col-8 offset-2">
+                    
+                    <div  id="content-textarea" class="form-group">
+                      <label for="body" class="h3">Содержимое</label>
+                      <textarea id="editor" name="content" class="form-control">{{ record.content|raw }}</textarea>
+                    </div> 
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block footer%} 
+  <script src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js" integrity="sha256-CtKylYan+AJuoH8jrMht1+1PMhMqrKnB8K5g012WN5I=" crossorigin="anonymous"></script>
+  <script src="/js/vue.js"></script>
+  <script>
+    
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+    $('.save').click(function(){
+      $('.form').submit();
+    });
+</script>
+<script>
+  new Vue({
+    el:'#app',
+    data: {
+      classes: {
+        controls:{
+          'error': 'is-invalid',
+          'success': 'is-valid',
+          'warning': 'is-warning'
+        },
+        feedback:{
+          'error': 'invalid-feedback',
+          'success': 'valid-feedback',
+          'warning': 'warning-feedback'
+        }
+        
+      },
+      title: {
+        value: '{{ record.title }}',
+        msg: {
+          type: 'error',
+          text: ''
+        },
+      },
+      slug: {
+        value: '{{ record.slug }}',
+        msg: {
+          type: 'error',
+          text: ''
+        },
+      },
+      metaTitle: {
+        value: '{{ record.meta_title }}',
+        msg: {
+          type: 'error',
+          text: ''
+        },
+      },
+      metaDescription: {
+        value: '{{ record.meta_description }}',
+        msg: {
+          type: 'error',
+          text: ''
+        },
+      },
+      id: '{{ record.id }}'
+    },
+    beforeMount(){
+      this.validateTitle();
+      this.validateSlug();
+      this.validateMetaTitle();
+      this.validateMetaDescription();
+    },
+    watch: {
+      'slug.value': {    
+        handler: function(value){
+
+          let vm = this;
+          vm.slug.value = this.slugify(value);
+
+          if(vm.slug.value == ''){
+            vm.setMessage(vm.slug, 'error', 'Заполните поле slug');
+          }else if(vm.slug.value.length > 55){
+            vm.setMessage(vm.slug, 'warning', 'Не рекомендуется, чтобы поле "slug" было длинней 55 символов');
+          }else{
+            vm.setMessage(vm.slug, 'success');
+          }
+          
+          let formData = new FormData();
+          formData.append("slug", value);
+          formData.append("id", vm.id);
+
+          $.ajax({
+              type: 'POST',
+              url: '/admin/publishment/check-slug',
+              data: formData,
+              processData: false,
+              contentType: false,
+              dataType: 'json',
+              success: function(data){
+                  if(data.response == 'error'){
+                    vm.setMessage(vm.slug, 'error', 'Статья с таким слагом существует');
+                  }
+                  
+                  
+              },
+              error: function(data){
+                  console.log('error occured');
+                  
+              }
+          });
+        },
+        deep: true
+            
+
+
+      },
+      'metaDescription.value': {    
+        handler: function(value){
+
+          let vm = this;
+          vm.validateMetaDescription();
+        }
+      },
+      'metaTitle.value': {    
+        handler: function(value){
+
+          let vm = this;
+          vm.validateMetaTitle();
+        }
+      }
+    },
+    methods: {
+      setMessage: function(field, msgType, msgText){
+        
+        let vm = this;
+        field.msg.type = msgType;
+        field.msg.text = msgText;
+      },
+      generateSlug: function (){
+        this.slug.value = this.slugify(this.title.value).substr(0, 55);
+      },
+      generateMetaTitle: function (){
+        this.metaTitle.value = this.title.value;
+      },
+      generateMetaDescription: function (){
+        this.metaDescription.value = this.title.value;
+      },
+      validateTitle: function(event){
+        if(this.title.value == ''){
+          this.setMessage(this.title, 'error', 'Заполните поле заголовок');
+        }else{
+          this.setMessage(this.title, 'success');
+        }
+      },
+      validateMetaTitle: function(event){
+        if(this.metaTitle.value == ''){
+          this.setMessage(this.metaTitle, 'warning', 'Рекомендуется заполните поле <title> ');
+        }else if(this.metaTitle.value.length > 55){
+          this.setMessage(this.metaTitle, 'warning', 'Не рекомендуется, чтобы поле <title> было длинней 55 символов');
+        }else{
+          this.setMessage(this.metaTitle, 'success');
+        }
+      },
+      validateMetaDescription: function(event){
+        if(this.metaDescription.value == ''){
+          this.setMessage(this.metaDescription, 'warning', 'Рекомендуется заполните поле <description>');
+        }else{
+          this.setMessage(this.metaDescription, 'success');
+        }
+          
+        
+      },
+      validateSlug: function(event){
+        
+          if(this.slug.value == ''){
+            this.setMessage(this.slug, 'error', 'Заполните поле slug');
+          }else if(this.slug.value.length > 55){
+            this.setMessage(this.slug, 'warning', 'Не рекомендуется, чтобы поле "slug" было длинней 55 символов');
+          }else{
+            this.setMessage(this.slug, 'success');
+          }
+          let vm = this;
+          let formData = new FormData();
+          formData.append("slug", vm.slug.value);
+          formData.append("id", vm.id);
+
+          $.ajax({
+              type: 'POST',
+              url: '/admin/publishment/check-slug',
+              data: formData,
+              processData: false,
+              contentType: false,
+              dataType: 'json',
+              success: function(data){
+                  if(data.response == 'error'){
+                    vm.setMessage(vm.slug, 'error', 'Статья с таким слагом существует');vm.slug.isValid = false;
+                  }
+                  
+                  
+              },
+              error: function(data){
+                  console.log('error occured');
+                  
+              }
+          });
+        
+      },
+      slugify: function (s, opt) {
+        s = String(s);
+        opt = Object(opt);
+        
+        var defaults = {
+          'delimiter': '-',
+          'limit': undefined,
+          'lowercase': true,
+          'replacements': {},
+          'transliterate': (typeof(XRegExp) === 'undefined') ? true : false
+        };
+        
+        // Merge options
+        for (var k in defaults) {
+          if (!opt.hasOwnProperty(k)) {
+            opt[k] = defaults[k];
+          }
+        }
+        
+        var char_map = {
+          // Latin symbols
+          '©': '(c)',
+
+          // Russian
+          'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ё': 'Yo', 'Ж': 'Zh',
+          'З': 'Z', 'И': 'I', 'Й': 'J', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O',
+          'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Х': 'H', 'Ц': 'C',
+          'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Sh', 'Ъ': '', 'Ы': 'Y', 'Ь': '', 'Э': 'E', 'Ю': 'Yu',
+          'Я': 'Ya',
+          'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
+          'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+          'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c',
+          'ч': 'ch', 'ш': 'sh', 'щ': 'sh', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu',
+          'я': 'ya',
+
+          // Ukrainian
+          'Є': 'Ye', 'І': 'I', 'Ї': 'Yi', 'Ґ': 'G',
+          'є': 'ye', 'і': 'i', 'ї': 'yi', 'ґ': 'g',
+
+        };
+        
+        // Make custom replacements
+        for (var k in opt.replacements) {
+          s = s.replace(RegExp(k, 'g'), opt.replacements[k]);
+        }
+        
+        // Transliterate characters to ASCII
+        if (opt.transliterate) {
+          for (var k in char_map) {
+            s = s.replace(RegExp(k, 'g'), char_map[k]);
+          }
+        }
+        
+        // Replace non-alphanumeric characters with our delimiter
+        var alnum = (typeof(XRegExp) === 'undefined') ? RegExp('[^a-z0-9]+', 'ig') : XRegExp('[^\\p{L}\\p{N}]+', 'ig');
+        s = s.replace(alnum, opt.delimiter);
+        
+        // Remove duplicate delimiters
+        s = s.replace(RegExp('[' + opt.delimiter + ']{2,}', 'g'), opt.delimiter);
+        
+        // Truncate slug to max. characters
+        s = s.substring(0, opt.limit);
+        
+        // Remove delimiter from ends
+        s = s.replace(RegExp('(^' + opt.delimiter + '|' + opt.delimiter + '$)', 'g'), '');
+        
+        return opt.lowercase ? s.toLowerCase() : s;
+      },
+      
+    }
+
+  })
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  $('#list-meta').on('click', function (e) {
+      console.log('fdsa');
+      $('#content-textarea').css('display', 'none');
+    })
+    $('#list-info').on('click', function (e) {
+      
+      $('#content-textarea').show('display', '');
+    })
+  
+</script>
+{% endblock %}

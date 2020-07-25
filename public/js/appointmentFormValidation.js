@@ -3,16 +3,8 @@ $( document ).ready(function() {
     let form = $('#appointment-form');
     let phoneInput = $("[name='phone']");
     let nameInput = $("[name='name']");
-  
 
-    $.jMaskGlobals = {
-        translation: {
-            'n': { pattern: /\d/ },
-        }
-    };
-    $('.phone-mask').mask('+38(0nn)-nnn-nnnn').val("+38(0");
-    
-    /* Мне это не нравиться и уже 3 часа ночи поэтому сделаю так, потом переделаю */
+     /* Мне это не нравиться и уже 3 часа ночи поэтому сделаю так, потом переделаю  */
     let isPhoneValid = false;
     let isNameValid = false;
 
@@ -95,7 +87,11 @@ $( document ).ready(function() {
                         if(data.errors.hasOwnProperty('recaptcha_failed')){
                             $('#recaptchaError').show();
                         }
-                        grecaptcha.reset();
+                        grecaptcha.reset($('.g-recaptcha'),{
+                            'callback': function(response){
+                                $('#recaptchaError').hide();
+                            }
+                        });
                     }
                     
                 },

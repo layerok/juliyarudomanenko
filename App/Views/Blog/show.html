@@ -1,0 +1,39 @@
+{% set page = "blog"%}
+{% extends "base.html" %}
+
+{% block title %}{{ record.meta_title }}{% endblock %}
+
+{% block description %}{{ record.content | html_entity_decode |truncate(140, true, '...')|raw|nl2br|striptags   }}{% endblock %}
+
+{% block footer%} {% endblock %}
+
+{% block body %}
+    <section class="section container">
+        <div class="row">
+            <div class="col-md-3  my-2">
+                <img src="{{ record.path ~ record.image }}" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="h2">{{ record.title }}</h1>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        
+                        {{ record.content| html_entity_decode | raw}}
+                        
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col">
+                        <a class="btn btn-light " href="/appointment/index">Записаться на прием</a>
+                        <a class="link ml-3" href="/blog/index">К другим постам</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

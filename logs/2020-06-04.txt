@@ -1,0 +1,76 @@
+[04-Jun-2020 01:55:10 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 04:47:10 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('apple-app-site-...')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 04:55:28 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('css/header.css')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 04:55:28 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('js/small-menu.j...')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 08:18:21 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 08:34:42 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 08:34:43 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 11:09:55 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 11:09:56 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 11:12:14 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 13:27:13 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 15:30:07 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 16:56:38 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 18:11:52 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('service.php')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 21:03:12 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('robots.txt')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 21:03:16 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('service.php')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 21:12:50 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('blog.php')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 21:59:02 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('apple-app-site-...')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130
+[04-Jun-2020 22:00:37 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /home/u804181069/domains/juliyarudomanenko.com/public_html/index.php(50): Core\Router->dispatch('about.php')
+#1 {main}
+Thrown in '/home/u804181069/domains/juliyarudomanenko.com/Core/Router.php' on line 130

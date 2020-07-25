@@ -46,6 +46,8 @@ class View
         if ($twig === null) {
             $loader = new \Twig_Loader_Filesystem(dirname(__DIR__) . '/App/Views');
             $twig = new \Twig_Environment($loader);
+            $twig->addFilter(new \Twig_SimpleFilter('html_entity_decode', 'html_entity_decode'));
+            $twig->addExtension(new \Twig_Extensions_Extension_Text());
             $twig->addGlobal('current_admin',\App\Auth::getAdmin());
             $twig->addGlobal('flash_messages',\App\Flash::getMessages());
         }

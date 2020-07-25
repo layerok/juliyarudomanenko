@@ -34,7 +34,10 @@ abstract class Model
     }
     protected function deleteFile($path){
         if(file_exists($_SERVER['DOCUMENT_ROOT'].$path)){
-            unlink($_SERVER['DOCUMENT_ROOT'].$path);
+            if(!is_dir($_SERVER['DOCUMENT_ROOT'].$path)){
+                unlink($_SERVER['DOCUMENT_ROOT'].$path);
+            }
+            
         }
     }
 }
