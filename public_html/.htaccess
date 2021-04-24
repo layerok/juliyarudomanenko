@@ -1,6 +1,6 @@
 # Remove the question mark from the request but maintain the query string
 RewriteEngine On
-CheckCaseOnly On
+#CheckCaseOnly On
 
 # Uncomment the following line if your public folder isn't the web server's root
 # RewriteBase /
@@ -14,16 +14,16 @@ RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 
 
 # DO NOT REMOVE THIS LINE AND THE LINES BELLOW UPGRADE_INSECURE_REQUESTS:juliyarudomanenko.com
-Header always set Content-Security-Policy: upgrade-insecure-requests
+#Header always set Content-Security-Policy: upgrade-insecure-requests
 # DO NOT REMOVE THIS LINE AND THE LINES BELLOW UPGRADE_INSECURE_REQUESTS:juliyarudomanenko.com
 
 
 
 # DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:juliyarudomanenko.com
-RewriteEngine on
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} (www\.)?juliyarudomanenko.com
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteEngine on
+#RewriteCond %{HTTPS} off
+#RewriteCond %{HTTP_HOST} (www\.)?juliyarudomanenko.com
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:juliyarudomanenko.com
 
 

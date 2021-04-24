@@ -34,7 +34,7 @@ class FacebookComment extends \Core\Model
     public static function getAll()
     {
         $sql =" SELECT *,
-                       row_number() OVER (ORDER BY id) as rowId 
+                       id as rowId 
                 FROM facebook_comments";
 
         $db = static::getDB();
