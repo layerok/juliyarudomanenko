@@ -36,7 +36,7 @@ class Appointment extends \Core\Model
     }
 
     public static function getAll(){
-        $sql = "SELECT row_number() OVER (ORDER BY id) as rowId,
+        $sql = "SELECT appointments.id as rowId,
                        appointments.*,
                        appointments.id AS appointmentsId,
                        services.name AS serviceName, 
