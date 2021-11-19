@@ -1,7 +1,7 @@
 {% set page = "comment"%}
 {% extends "Admin/base.html" %}
 
-{% block title %}Сообщения{% endblock %}
+{% block title %}Публикации{% endblock %}
 
 {% block footer%} 
 
@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-md-3">
         <a href="/admin/comment/add" class="btn btn-primary btn-block" >
-          <i class="fas fa-plus"></i> Добавить комментарий
+          <i class="fas fa-plus"></i> Добавить публикацию
         </a>
       </div>
     </div>
@@ -27,13 +27,13 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4>Комментарии</h4>
+              <h4>Публикации</h4>
             </div>
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
                   <th>#</th>
-                  <th>Ссылка на комментарий</th>
+                  <th>Ссылка на публикацию</th>
                   <th>Действия</th>
                 </tr>
               </thead>

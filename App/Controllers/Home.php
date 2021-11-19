@@ -19,7 +19,7 @@ class Home extends \Core\Controller
 
     public function before(){
         $this->facebook_comment = new FacebookComment();
-        $this->facebook_comments = $this->facebook_comment->getAll();
+        $this->facebook_posts = $this->facebook_comment->getAll();
         $this->service = new Service();
         $this->services = $this->service->getAll();
     }
@@ -32,7 +32,7 @@ class Home extends \Core\Controller
     {
         View::renderTemplate('Home/index.html',[
             "services" => $this->services,
-            "facebook_comments" => $this->facebook_comments
+            "facebook_posts" => $this->facebook_posts
             ]);
     }
     

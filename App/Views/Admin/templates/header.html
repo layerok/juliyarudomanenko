@@ -18,7 +18,7 @@
               <a href="/admin/feedback/index" class="nav-link {% if page == 'message' %} active {% endif %}">Сообщения</a>
             </li>
             <li class="nav-item px-2">
-              <a href="/admin/comment/index" class="nav-link {% if page == 'comment' %} active {% endif %}">Комментарии</a>
+              <a href="/admin/comment/index" class="nav-link {% if page == 'comment' %} active {% endif %}">Публикации</a>
             </li>
             <li class="nav-item px-2">
               <a href="/admin/certification/index" class="nav-link {% if page == 'certificate' %} active {% endif %}">Сертификаты</a>
@@ -65,7 +65,7 @@
             {% elseif page == "message" %}
               <i class="fas fa-envelope"></i> Сообщения
             {% elseif page == "comment" %}
-              <i class="fas fa-comment"></i> Комментарии
+              <i class="fas fa-comment"></i> Публикации
             {% elseif page == "certificate" %}
               <i class="fas fa-graduation-cap"></i> Сертификаты
               {% elseif page == "post" %}

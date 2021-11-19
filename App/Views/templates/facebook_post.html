@@ -1,0 +1,18 @@
+{% if facebook_posts %}
+    <section class="comments section container d-flex flex-column">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="h1 mb-4">Публикации</h2>
+            </div>
+        </div>
+        <div class="row loadMore">
+
+            {% for facebook_post in facebook_posts %}
+                <div class="item col-lg-6 mb-4">
+                    <div class="fb-post" data-width="540" data-href="{{ facebook_post.link }}"></div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+{% endif %}

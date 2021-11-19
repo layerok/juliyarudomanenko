@@ -3,10 +3,9 @@
 
 {% block title %}Психологическая помощь от Юлии Рудоманенко{% endblock %}
 
-{% block footer%} 
-    <!-- Load Facebook SDK for JavaScript -->
+{% block footer%}
     <div id="fb-root"></div>
-    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v12.0" nonce="wgfC6a4f"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
     <script src="/js/plugins/loadMoreResults.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -23,7 +22,7 @@
                     name: 'div',
                     class: 'row'
                 }
-                
+
             });
             $('.comments .loadMore').loadMoreResults({
                 displayedItems:2,
@@ -36,7 +35,7 @@
                     name: 'div',
                     class: 'item'
                 }
-                
+
             });
         });
     </script>
@@ -63,9 +62,7 @@
     <!-- Услуги -->
     {% include 'templates/service.html' %}
 
-    <!-- Комментарии -->
-    {% include 'templates/facebook_comment.html' %}      
-
+    {% include 'templates/facebook_post.html' %}
     <section id="feedback" class="feedback section container">
         <div class="row">
             <div class="col-lg-6">
