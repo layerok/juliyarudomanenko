@@ -2,6 +2,10 @@
 
 namespace Core;
 
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFilter;
+
 /**
  * View
  *
@@ -44,9 +48,11 @@ class View
         static $twig = null;
 
         if ($twig === null) {
-            $loader = new \Twig_Loader_Filesystem(dirname(__DIR__) . '/App/Views');
-            $twig = new \Twig_Environment($loader);
-            $twig->addFilter(new \Twig_SimpleFilter('html_entity_decode', 'html_entity_decode'));
+            $loader = new FilesystemLoader([
+                dirname(__DIR__) . '/App/Views'
+            ], getcwd());
+            $twig = new Environment($loader);
+            $twig->addFilter(new TwigFilter('html_entity_decode', 'html_entity_decode'));
             $twig->addExtension(new \Twig_Extensions_Extension_Text());
             $twig->addGlobal('current_admin',\App\Auth::getAdmin());
             $twig->addGlobal('flash_messages',\App\Flash::getMessages());
