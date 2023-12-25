@@ -40,7 +40,7 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                        <td>{{ record.rowId }}</td>
+                        <td>{{ loop.index }}</td>
                         <td><a target="_blank" href="{{ record.link }}">{{ record.link }}</a></td>
                         <td>
                             <a href="/admin/comment/{{ record.id }}/edit" class="mr-3" >

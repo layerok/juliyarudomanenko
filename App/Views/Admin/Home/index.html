@@ -55,7 +55,7 @@
               <tbody>
                 {% for appointment in appointments %}
                     <tr>
-                      <td>{{ appointment.rowId }}</td>
+                      <td>{{ loop.index }}</td>
                       <td>{{ appointment.purchase_date }}</td>
                       <td>{{ appointment.phone }}</td>
                       <td>{{ appointment.customerName }}</td>

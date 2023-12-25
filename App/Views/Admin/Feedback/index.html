@@ -30,7 +30,7 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                        <td>{{ record.rowId }}</td>
+                        <td>{{ loop.index }}</td>
                         <td>{{ record.name }}</td>
                         <td>{{ record.phone }}</td>
                         <td>{{ record.message }}</td>

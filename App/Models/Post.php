@@ -38,7 +38,7 @@ class Post extends \Core\Model
     }
 
     public static function getAll(){
-        $sql = "SELECT *,row_number() OVER (ORDER BY id) as rowId FROM posts ORDER BY id DESC";
+        $sql = "SELECT * FROM posts ORDER BY id DESC";
 
         $db = static::getDB();
         $stmt = $db->query($sql);

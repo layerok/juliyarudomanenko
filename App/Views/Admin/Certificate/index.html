@@ -46,7 +46,7 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                        <td>{{ record.rowId }}</td>
+                        <td>{{ loop.index }}</td>
                         <td><a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
                         <td>
                           
