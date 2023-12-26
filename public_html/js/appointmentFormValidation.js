@@ -75,23 +75,23 @@ $( document ).ready(function() {
                 contentType: false,
                 dataType: 'json',
                 success: function(data){
-                    if(data.errors.length == 0){
-                        $('#recaptchaError').hide();
+                    if(data.errors.length === 0){
+                        //$('#recaptchaError').hide();
                         setUndefined([phoneInput,nameInput]);
                         clearValue([phoneInput,nameInput]);
-                        grecaptcha.reset();
+                        //grecaptcha.reset();
                         isPhoneValid = false;
                         isNameValid = false;
                         window.location.href = "/appointment/thank-you";
                     }else{
                         if(data.errors.hasOwnProperty('recaptcha_failed')){
-                            $('#recaptchaError').show();
+                            //$('#recaptchaError').show();
                         }
-                        grecaptcha.reset($('.g-recaptcha'),{
+                        /*grecaptcha.reset($('.g-recaptcha'),{
                             'callback': function(response){
                                 $('#recaptchaError').hide();
                             }
-                        });
+                        });*/
                     }
                     
                 },
