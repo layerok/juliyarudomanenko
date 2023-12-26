@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Config;
 use App\Models\Customer;
+use App\Telegram;
 use Core\Controller;
 use \Core\View;
 use \App\Request;
@@ -62,18 +64,11 @@ class About extends Controller
 
 
         if(count($errors) > 0) {
-            if(Request::isAjax()){
-                $response = [
-                    "errors" => $errors
-                ];
-                echo json_encode($response);
 
-            }else{
-                View::renderTemplate('About/contact.html',[
-                    "errors" => $errors,
-                    "post_data" => $_POST
-                ]);
-            }
+            echo json_encode([
+                "errors" => $errors
+            ]);
+
             return;
         }
 
@@ -87,32 +82,28 @@ class About extends Controller
         $message->customer()->associate($customer);
         $message->save();
 
-        echo json_encode([
-            'errors' => []
-        ]);
-
-/*        $post_data = [
+        $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
+        $telegram->send("Сообщение",[
             "name" => [
-                "value" => $this->name ?? "",
+                "value" => $customer->name ?? "",
                 "description" => "Имя",
                 "emoji"=>"\xE2\x9C\x8F"
             ],
             "phone" => [
-                "value" => $this->phone ?? "",
+                "value" => $customer->phone ?? "",
                 "description" => "Телефон",
                 "emoji"=>"\xF0\x9F\x93\x9E"
             ],
             "message" => [
-                "value" => $this->message ?? "",
+                "value" => $message->message ?? "",
                 "description" => "Сообщение",
                 "emoji"=>"\xF0\x9F\x93\xA8"
             ]
-        ];
+        ]);
 
-        $telegram = new Telegram(Config::BOT_TOKEN,Config::CHAT_ID);
-        $telegram->send("Сообщение",$post_data);*/
-
-
+        echo json_encode([
+            'errors' => []
+        ]);
 
     }
 

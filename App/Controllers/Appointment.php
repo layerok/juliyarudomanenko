@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Config;
 use App\Models\Customer;
+use App\Telegram;
 use Core\Controller;
 use \Core\View;
 use \App\Models\Service;
@@ -122,7 +124,9 @@ class Appointment extends Controller
 
         $appointment->save();
 
-/*        $post_data = [
+        // todo: I'll fix this nightmare, it is already 5 AM at the morning, I need some rest
+        $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
+        $telegram->send("Запись на прием", [
             "name" => [
                 "value" => $appointment->customer->name ?? "",
                 "description" => "Имя",
@@ -138,11 +142,7 @@ class Appointment extends Controller
                 "description" => "Формат встречи",
                 "emoji" => "\xF0\x9F\x93\xA8"
             ]
-        ];
-
-        $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
-        $telegram->send("Запись на прием", $post_data);*/
-
+        ]);
 
         if (Request::isAjax()) {
 

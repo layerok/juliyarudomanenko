@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property integer $id
- * @property string $phone
  * @property string $message
  */
 class CustomerMessage extends Model
