@@ -3,7 +3,7 @@
 
 {% block title %}{{ record.meta_title }}{% endblock %}
 
-{% block description %}{{ record.content | html_entity_decode |truncate(140, true, '...')|raw|nl2br|striptags   }}{% endblock %}
+{% block description %}{{ record.content | html_entity_decode |u.truncate(140, '...')|raw|nl2br|striptags   }}{% endblock %}
 
 {% block footer%} {% endblock %}
 
@@ -11,7 +11,7 @@
     <section class="section container">
         <div class="row">
             <div class="col-md-3  my-2">
-                <img src="{{ record.path ~ record.image }}" alt="" class="img-fluid">
+                <img src="{{ record.image }}" alt="" class="img-fluid">
             </div>
             <div class="col-md-8">
                 <div class="row">

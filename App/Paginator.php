@@ -6,9 +6,25 @@ class Paginator
 {
     private $currentPage;
     private $recordsCount;
-    private $perPageLimit;
+    private $perPageLimit = 10;
     private $maxPagesCount;
     private $pagesCount;
+
+    public function getPerPageLimit(): int {
+        return $this->perPageLimit;
+    }
+
+    public function getMaxPagesCount(): int {
+        return $this->maxPagesCount;
+    }
+
+    public function getRecordsCount(): int {
+        return $this->recordsCount;
+    }
+
+    public function getCurrentPage(): int {
+        return $this->currentPage;
+    }
  
     public function setCurrentPage($page)
     {
@@ -61,6 +77,7 @@ class Paginator
         $pages = [
                 'current' => $this->currentPage,
                 'pages'   => $this->getPageRange(),
+                'limit'   => $this->perPageLimit
         ];
  
         $prevPage = $this->currentPage != 1 ? $this->currentPage - 1 : null;

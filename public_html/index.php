@@ -1,5 +1,7 @@
 <?php
 
+use App\Config;
+use Illuminate\Database\Capsule\Manager as Capsule;
 /**
  * Front controller
  *
@@ -22,6 +24,24 @@ error_reporting(E_ALL);
 set_error_handler('Core\Error::errorHandler');
 set_exception_handler('Core\Error::exceptionHandler');
 
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver' => 'mysql',
+    'host' => Config::DB_HOST,
+    'database' => Config::DB_NAME,
+    'username' => Config::DB_USER,
+    'password' => Config::DB_PASSWORD,
+    'charset' => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix' => '',
+]);
+
+// Make this Capsule instance available globally via static methods... (optional)
+$capsule->setAsGlobal();
+
+// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+$capsule->bootEloquent();
 
 /**
  * Routing

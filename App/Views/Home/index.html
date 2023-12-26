@@ -1,37 +1,39 @@
-{% set page = "home"%}
+{% set page = "home" %}
 {% extends "base.html" %}
 
 {% block title %}Психологическая помощь от Юлии Рудоманенко{% endblock %}
 
-{% block footer%}
+{% block footer %}
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v12.0" nonce="wgfC6a4f"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v12.0"
+            nonce="wgfC6a4f"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"
+            integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
     <script src="/js/plugins/loadMoreResults.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.services .loadMore').loadMoreResults({
-                displayedItems:2,
+                displayedItems: 2,
                 showItems: 2,
                 button: {
                     'class': 'btn btn-light',
                     'text': 'Показать еще'
                 },
-                tag:{
+                tag: {
                     name: 'div',
                     class: 'row'
                 }
 
             });
             $('.comments .loadMore').loadMoreResults({
-                displayedItems:2,
+                displayedItems: 2,
                 showItems: 2,
                 button: {
                     'class': 'btn btn-light',
                     'text': 'Показать еще'
                 },
-                tag:{
+                tag: {
                     name: 'div',
                     class: 'item'
                 }
@@ -40,7 +42,7 @@
         });
     </script>
     <script src="/js/homeFormValidation.js"></script>
-    
+
 
 {% endblock %}
 
@@ -49,9 +51,12 @@
     <section class="main-screen section container">
         <div class="row">
             <div class="col-lg-6 order-2 order-lg-1">
-                <h1 class="h1 mb-4">Психологическая помощь</h1>
-                <p class="mb-4">Если Вы попали на мой сайт, значит Вы в процессе поиска решения важного жизненного вызова, который называют кризисом. Я помогу Вам разглядеть проблему со всех сторон и найти самое оптимальное решение для Вас!</p>
-                <a href="#services" class="btn btn-light">Узнать больше</a>
+                <h1 data-editable data-name="home_heading" data-fixture class="h1 mb-4">{{ msg('home_heading') }}</h1>
+                <p data-editable data-name="home_subheading" data-fixture class="mb-4">{{ msg('home_subheading') }}</p>
+
+                <a href="#services" class="btn btn-light">
+                    Узнать больше
+                </a>
             </div>
             <div class="offset-lg-1 col-lg-5 col-4 offset-4  order-1 order-lg-2 pb-5">
                 <img class="main-screen__img img-fluid" src="/img/saving_circle_w256.png" alt="Спасательный круг">
@@ -66,51 +71,55 @@
     <section id="feedback" class="feedback section container">
         <div class="row">
             <div class="col-lg-6">
-                <h2 class="h1 mb-4">Оставьте сообщение</h2>
-                
+                <h2 class="h1 mb-4" data-editable data-fixture>Оставьте сообщение</h2>
+
                 {% if errors %}
                     <div class="p-2 border my-4">
-                        
+
                         {% for error in errors %}
                             <div class="text-danger">{{ error }}</div>
                         {% endfor %}
                     </div>
 
                 {% endif %}
-            
-                <form name="messageForm" id="message-form" action="/home/send#feedback" method="post" >
+
+                <form name="messageForm" id="message-form" action="/home/send#feedback" method="post">
                     <div class="form-group">
-                      <label for="name">Имя:<abbr class="text-danger">*</abbr></label>
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя" 
-                      value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
-                      <div class="invalid-feedback">Введите имя</div>
-                      <div class="valid-feedback">Выглядит хорошо</div>
+                        <label for="name">Имя:<abbr class="text-danger">*</abbr></label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя"
+                               value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
+                        <div class="invalid-feedback">Введите имя</div>
+                        <div class="valid-feedback">Выглядит хорошо</div>
                     </div>
                     <div class="form-group">
                         <label for="phone">Телефон:<abbr class="text-danger">*</abbr></label>
                         <input type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
-                        value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
+                               value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
                         <div class="invalid-feedback">Укажите верный телефон</div>
                         <div class="valid-feedback">Выглядит хорошо</div>
-                      </div>
-                      <div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="message">Сообщение:</label>
-                        <textarea class="form-control " name="message" id="message" placeholder="Кратко опишите вашу проблему" >{% if post_data.message %}{{ post_data.message }}{% endif%}</textarea>
-                      </div>
-                      <div class="form-group">
+                        <textarea class="form-control " name="message" id="message"
+                                  placeholder="Кратко опишите вашу проблему">{% if post_data.message %}{{ post_data.message }}{% endif %}</textarea>
+                    </div>
+    {#                <div class="form-group">
                         <div class="form__recaptcha">
                             <div class="g-recaptcha" data-sitekey="6Lcgh_oUAAAAAIPl1cgjobXZD1FJwjzY2ag_AIKk"></div>
-                            <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не робот!</div>
+                            <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не
+                                робот!
+                            </div>
                         </div>
-                    </div>
+                    </div>#}
                     <input id="close-the-deal-btn" type="submit" name="submit" class="btn btn-light" value="Отправить">
                     <div class="form-group my-3">
-                        <p class="confirmation text-success text-center" style="display:none">Спасибо! Ваше сообщение отправлено!</p>
+                        <p class="confirmation text-success text-center" style="display:none">Спасибо! Ваше сообщение
+                            отправлено!</p>
                     </div>
-                  </form>
+                </form>
             </div>
             <div class="offset-lg-2 col-lg-4">
-                
+
             </div>
 
         </div>

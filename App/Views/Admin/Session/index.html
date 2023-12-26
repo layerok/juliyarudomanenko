@@ -45,8 +45,8 @@
                 {% for record in records %}
                     <tr>
                       <td>{{ loop.index }}</td>
-                      <td><a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
-                      <td>{{ record.price ~ record.currency }}</td>
+                      <td><a href="{{ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
+                      <td>{{ record.price }} грн.</td>
                       <td>{{ record.duration }}</td>
                       <td class="d-flex ">
                         <a href="/admin/session/{{ record.id }}/edit" class="mr-3" >

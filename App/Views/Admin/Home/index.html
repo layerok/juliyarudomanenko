@@ -55,14 +55,14 @@
               <tbody>
                 {% for appointment in appointments %}
                     <tr>
-                      <td>{{ loop.index }}</td>
+                      <td>{{ loop.index + ((pages.current - 1) * pages.limit) }}</td>
                       <td>{{ appointment.purchase_date }}</td>
                       <td>{{ appointment.phone }}</td>
-                      <td>{{ appointment.customerName }}</td>
-                      <td>{{ appointment.serviceName }}</td>
+                      <td>{{ appointment.customer.name }}</td>
+                      <td>{{ appointment.service.name }}</td>
                       <td>{{ appointment.format }}</td>
                       <td>
-                      <a href="/admin/home/{{ appointment.appointmentsId }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="text-danger" >
+                      <a href="/admin/home/{{ appointment.id }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="text-danger" >
                         <i class="fas fa-trash"></i>
                       </a>
                     </td>

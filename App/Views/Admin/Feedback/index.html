@@ -30,11 +30,11 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ record.name }}</td>
-                        <td>{{ record.phone }}</td>
+                        <td>{{ loop.index + ((pages.current - 1) * pages.limit) }}</td>
+                        <td>{{ record.customer.name }}</td>
+                        <td>{{ record.customer.phone }}</td>
                         <td>{{ record.message }}</td>
-                        <td><a href="/admin/feedback/{{ record.customersMessagesId }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="text-danger" >
+                        <td><a href="/admin/feedback/{{ record.id }}/delete" onclick="return confirm('Безвозвратно удалить?')" class="text-danger" >
                           <i class="fas fa-trash"></i>
                         </a></td>
                     

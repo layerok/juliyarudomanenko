@@ -1,105 +1,111 @@
-{% set page = "online_appointment"%}
+{% set page = "online_appointment" %}
 {% extends "base.html" %}
 
 {% block title %}{{ service.name }}{% endblock %}
 
-{% block footer%} 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
+{% block footer %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"
+            integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
     <script src="/js/appointmentFormValidation.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 {% endblock %}
 
 {% block body %}
 
-<section id="feedback" class="feedback section container">
-    <div class="row ">
-        <div class="col-lg-6 order-2 order-lg-1">
-            <h2 class="h1 mb-4">Введите Ваши данные:</h2>
-            
-            {% if errors %}
-                <div class="p-2 border my-4">
-                    
-                    {% for error in errors %}
-                        <div class="text-danger">{{ error }}</div>
-                    {% endfor %}
-                </div>
+    <section id="feedback" class="feedback section container">
+        <div class="row ">
+            <div class="col-lg-6 order-2 order-lg-1">
+                <h2 class="h1 mb-4">Введите Ваши данные:</h2>
 
-            {% endif %}
-        
-            <form name="appointmentForm" id="appointment-form" action="/appointment/{{service.id}}/send" method="post" >
-                <div class="form-group">
-                  <label for="name">Имя:<abbr class="text-danger">*</abbr></label>
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя" 
-                  value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
-                  <div class="invalid-feedback">Введите имя</div>
-                  <div class="valid-feedback">Выглядит хорошо</div>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Телефон:<abbr class="text-danger">*</abbr></label>
-                    <input type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
-                    value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
-                    <div class="invalid-feedback">Укажите верный телефон</div>
-                    <div class="valid-feedback">Выглядит хорошо</div>
-                  </div>
-                  <div class="form-group">
+                {% if errors %}
+                    <div class="p-2 border my-4">
+
+                        {% for error in errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+
+                <form name="appointmentForm" id="appointment-form" action="/appointment/{{ service.id }}/send"
+                      method="post">
+                    <div class="form-group">
+                        <label for="name">Имя:<abbr class="text-danger">*</abbr></label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя"
+                               value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
+                        <div class="invalid-feedback">Введите имя</div>
+                        <div class="valid-feedback">Выглядит хорошо</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон:<abbr class="text-danger">*</abbr></label>
+                        <input type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
+                               value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
+                        <div class="invalid-feedback">Укажите верный телефон</div>
+                        <div class="valid-feedback">Выглядит хорошо</div>
+                    </div>
+                    <div class="form-group">
                         <label for="message">Формат встречи:</label>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="offline" name="format" value="offline" class="custom-control-input" checked>
+                            <input type="radio" id="offline" name="format" value="offline" class="custom-control-input"
+                                   checked>
                             <label class="custom-control-label" for="offline">Очно</label>
                         </div>
                         <div class="custom-control custom-radio">
                             <input type="radio" id="online" name="format" value="online" class="custom-control-input">
                             <label class="custom-control-label" for="online">Онлайн</label>
                         </div>
-                  </div>
-                  <div class="form-group">
+                    </div>
+    {#                <div class="form-group">
                         <div class="form__recaptcha">
                             <div class="g-recaptcha" data-sitekey="6Lcgh_oUAAAAAIPl1cgjobXZD1FJwjzY2ag_AIKk"></div>
-                            <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не робот!</div>
+                            <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не
+                                робот!
+                            </div>
                         </div>
-                  </div>
-                  <div class="form-group">
-                    <input id="send-message-btn" type="submit" name="submit" class="btn btn-light" value="Записаться">
-                    <a class="link ml-3" href="/appointment/index">К другим услугам</a>
-                  </div>
-              </form>
-        </div>
-        <div class="offset-lg-1 col-lg-5 order-1 order-lg-2 ">
-            <div class="mb-4">
-                <h2 class="h1 mb-4">Подробности:</h2>
-                <div class="row">
-                    <div class="col">
-                        <h3 class="h3 mb-2 mb-lg-4">{{ service.name }}</h3>
+                    </div>#}
+                    <div class="form-group">
+                        <input id="send-message-btn" type="submit" name="submit" class="btn btn-light"
+                               value="Записаться">
+                        <a class="link ml-3" href="/appointment/index">К другим услугам</a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="d-flex">
-                            <div class="properties d-flex flex-row flex-md-column">
-                                <div class="property d-flex align-items-center pb-2 pr-2">
-                                    <i class="property__icon far fa-clock"></i>
-                                    <span class="property__text px-2">{{ service.duration }}</span>
+                </form>
+            </div>
+            <div class="offset-lg-1 col-lg-5 order-1 order-lg-2 ">
+                <div class="mb-4">
+                    <h2 class="h1 mb-4">Подробности:</h2>
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="h3 mb-2 mb-lg-4">{{ service.name }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex">
+                                <div class="properties d-flex flex-row flex-md-column">
+                                    <div class="property d-flex align-items-center pb-2 pr-2">
+                                        <i class="property__icon far fa-clock"></i>
+                                        <span class="property__text px-2">{{ service.duration }}</span>
+                                    </div>
+                                    <div class="property d-flex align-items-center pb-2">
+                                        <i class="property__icon far fa-money-bill-alt"></i>
+                                        <span class="property__text px-2">{{ service.price }} грн.</span>
+                                    </div>
                                 </div>
-                                <div class="property d-flex align-items-center pb-2">
-                                    <i class="property__icon far fa-money-bill-alt"></i>
-                                    <span class="property__text px-2">{{ service.price ~ service.currency}}</span>
+                                <div class="properties d-flex flex-row flex-md-column">
+                                    <div class="property d-flex align-items-center pb-2">
+                                        <ul class="m-0">
+                                            <li><span class="property__text ">Очно и онлайн</span></li>
+                                        </ul>
+                                    </div>
                                 </div>
+
                             </div>
-                            <div class="properties d-flex flex-row flex-md-column">
-                                <div class="property d-flex align-items-center pb-2">
-                                    <ul class="m-0">
-                                        <li><span class="property__text ">Очно и онлайн</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 
 {% endblock %}

@@ -1,8 +1,13 @@
 {
     "require": {
+        "php": "^7.2.5",
         "twig/twig": "^2.0",
-        "verot/class.upload.php": "^2.0"
-        
+        "verot/class.upload.php": "^2.0",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "twig/string-extra": "2.12.5",
+        "illuminate/database": "^8.83",
+        "ext-curl": "*"
     },
     
     "autoload": {

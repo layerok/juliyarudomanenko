@@ -42,7 +42,7 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                      <td>{{ loop.index }}</td>
+                      <td>{{ loop.index + ((pages.current - 1) * pages.limit) }}</td>
                       <td>{{ record.title }}</td>
                       <td class="d-flex ">
                         <a href="/admin/publishment/{{ record.id }}/edit" class="mr-3" >

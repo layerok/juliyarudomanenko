@@ -2,9 +2,15 @@
 
 namespace Core;
 
+use App\Auth;
+use App\Flash;
+use App\Models\Message;
+use App\Models\Message as MessageModel;
 use Twig\Environment;
+use Twig\Extra\String\StringExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 /**
  * View
@@ -53,9 +59,14 @@ class View
             ], getcwd());
             $twig = new Environment($loader);
             $twig->addFilter(new TwigFilter('html_entity_decode', 'html_entity_decode'));
-            $twig->addExtension(new \Twig_Extensions_Extension_Text());
-            $twig->addGlobal('current_admin',\App\Auth::getAdmin());
-            $twig->addGlobal('flash_messages',\App\Flash::getMessages());
+            $twig->addFunction(new TwigFunction('msg', function($name, $default = null) {
+                /** @var MessageModel $message */
+                $message = MessageModel::where('name', '=',$name)->first();
+                return $message->content ?? $default;
+            }));
+            $twig->addExtension(new StringExtension());
+            $twig->addGlobal('current_admin', Auth::getAdmin());
+            $twig->addGlobal('flash_messages', Flash::getMessages());
         }
 
         echo $twig->render($template, $args);

@@ -6,12 +6,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.css" integrity="sha256-K4PK62zpbl/XelQ0bLxyUztMw5nLdGyd2qGmPTGM1oY=" crossorigin="anonymous" />
 {% endblock %}
 
-{% block footer%} 
+{% block footer%}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js" integrity="sha256-CtKylYan+AJuoH8jrMht1+1PMhMqrKnB8K5g012WN5I=" crossorigin="anonymous"></script>
 
 {% endblock %}
-    
-    
+
+
 
 {% block body %}
 <!-- Certificates -->
@@ -33,12 +33,11 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                        <td>{{ record.rowId }}</td>
-                        <td><a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
-                    
+                        <td>{{ loop.index + ((pages.current - 1) * pages.limit) }}</td>
+                        <td><a href="{{ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
                     </tr>
                 {% endfor %}
-                
+
               </tbody>
             </table>
             <!-- PAGINATION -->
@@ -67,7 +66,7 @@
             </nav>
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>

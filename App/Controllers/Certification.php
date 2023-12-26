@@ -2,32 +2,28 @@
 
 namespace App\Controllers;
 
+use Core\Controller;
 use \Core\View;
-use \App\Models\Certificate; 
+use \App\Models\Certificate;
 use \App\Paginator;
 
-class Certification extends \Core\Controller
+class Certification extends Controller
 {
-    public $per_page_limit = 10;
-    public $max_page_count = 5;
 
     public function indexAction()
     {
-        $page = isset($this->route_params['page']) ? (int)$this->route_params['page'] : 1;
-        $records = Certificate::getAll();
+        $records = Certificate::all()->toArray();
 
         $paginator = new Paginator();
-        $pages = $paginator->setCurrentPage($page)
-                                    ->setRecordsCount(count($records))
-                                    ->setPerPageLimit($this->per_page_limit)
-                                    ->setMaxPageCount($this->max_page_count)
-                                    ->getPages();
+        $pages = $paginator->setCurrentPage($this->route_params['page'] ?? 1)
+            ->setRecordsCount(count($records))
+            ->setPerPageLimit(10)
+            ->setMaxPageCount(5)
+            ->getPages();
 
-        $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
-        $records = Certificate::getAll();
-        View::renderTemplate('/Certificate/index.html',[
-            'records' => $updatedRecords,
-            'pages' => $pages
+        View::renderTemplate('/Certificate/index.html', [
+            'records' => array_slice($records, ($paginator->getCurrentPage() - 1) * $paginator->getPerPageLimit(), $paginator->getPerPageLimit()),
+            'pages' => $pages,
         ]);
     }
 

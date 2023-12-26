@@ -2,65 +2,43 @@
 
 namespace App\Controllers;
 
+use Core\Controller;
 use \Core\View;
 use \App\Models\Post;
-use \App\Flash;
 use \App\Paginator;
-use \App\Request;
 
-class Blog extends \Core\Controller
+
+class Blog extends Controller
 {
-    public $per_page_limit = 4;
-    public $max_page_count = 10;
-
     public function indexAction()
     {
-        $page = isset($this->route_params['page']) ? (int)$this->route_params['page'] : 1;
-        $records = Post::getAll();
+        $records = Post::orderBy('id', 'desc')->get()->toArray();
 
         $paginator = new Paginator();
-        $pages = $paginator->setCurrentPage($page)
-                                    ->setRecordsCount(count($records))
-                                    ->setPerPageLimit($this->per_page_limit)
-                                    ->setMaxPageCount($this->max_page_count)
-                                    ->getPages();
+        $pages = $paginator->setCurrentPage($this->route_params['page'] ?? 1)
+            ->setRecordsCount(count($records))
+            ->setPerPageLimit(4)
+            ->setMaxPageCount(10)
+            ->getPages();
 
-        $updatedRecords = array_slice($records, ($page-1)* $this->per_page_limit, $this->per_page_limit);
-         
-        View::renderTemplate('/Blog/index.html',[
-            'records' => $updatedRecords,
+        View::renderTemplate('/Blog/index.html', [
+            'records' => array_slice($records, ($paginator->getCurrentPage() - 1) * $paginator->getPerPageLimit(), $paginator->getPerPageLimit()),
             'pages' => $pages
         ]);
     }
 
-    /**
-     * Show the blog post
-     *
-     * @return void
-     */
     public function showAction()
     {
-        
-        $slug = $this->route_params['id'] ?? null;
-        if(isset($slug)){
-            
-            
-            $post = Post::findBySlug($slug);
-            
-            
-            if($post){
-                View::renderTemplate('Blog/show.html',[
-                    'record'=> $post
-                ]);
-            }else{
-                throw new \Exception("There is no such record",404);
-            }
-            
-            
-        
-        }else{
-            throw new \Exception("Slug is not specified",404);
+        if (!($slug = $this->route_params['id'] ?? null)) {
+            throw new \Exception("There is no such record", 404);
         }
-        
+
+        if (!$post = Post::where('slug', '=', $slug)->first()) {
+            throw new \Exception("There is no such record", 404);
+        }
+
+        View::renderTemplate('Blog/show.html', [
+            'record' => $post
+        ]);
     }
 }

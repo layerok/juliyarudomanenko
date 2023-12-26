@@ -46,8 +46,8 @@
               <tbody>
                 {% for record in records %}
                     <tr>
-                        <td>{{ loop.index }}</td>
-                        <td><a href="{{ record.path ~ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
+                        <td>{{ loop.index + ((pages.current - 1) * pages.limit) }}</td>
+                        <td><a href="{{ record.image }}" data-lightbox="roadtrip">{{ record.name}}</a></td>
                         <td>
                           
                             <a href="/admin/certification/{{ record.id }}/edit" class="mr-3" >

@@ -19,7 +19,7 @@
     {% for record in records %}
         <div   class="row mt-4  pb-4 border-light-bottom ">
             <div class="col-md-3 mb-2">
-                <img src="{{ record.path ~ record.image}}" alt="" class="d-none d-md-flex img-fluid">
+                <img src="{{ record.image}}" alt="" class="d-none d-md-flex img-fluid">
             </div>
             <div class="col-md-9">
                 
@@ -33,7 +33,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p >{{ record.content | html_entity_decode |truncate(140, true, '...')|raw|nl2br   }}</p>
+                        <p >{{ record.content|u.truncate(140, '...') | html_entity_decode |raw|nl2br   }}</p>
                     </div>
                     
                 </div>
