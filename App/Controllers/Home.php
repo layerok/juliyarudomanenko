@@ -12,10 +12,9 @@ class Home extends Controller
 
     public function indexAction()
     {
-        $fb_posts = FacebookComment::all()->toArray();
         View::renderTemplate('Home/index.html',[
-            "services" => Service::all(),
-            "facebook_posts" => $fb_posts,
+            "services" => Service::orderBy('id', 'desc')->get(),
+            "facebook_posts" => FacebookComment::orderBy('id', 'desc')->get(),
         ]);
     }
 
