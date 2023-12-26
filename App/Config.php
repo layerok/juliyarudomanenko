@@ -20,7 +20,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'juliya_rudomanenko_v2';
+    const DB_NAME = 'juliya_rudomanenko';
 
     /**
      * Database user
@@ -32,7 +32,7 @@ class Config
      * Database password
      * @var string
      */
-    const DB_PASSWORD = "root";
+    const DB_PASSWORD = "";
     /**
      * telegram bot token
      * @var string

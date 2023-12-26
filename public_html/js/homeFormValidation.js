@@ -78,24 +78,24 @@ $( document ).ready(function() {
                 dataType: 'json',
                 success: function(data){
                     
-                    if(data.errors.length == 0){
-                        $('#recaptchaError').hide();
+                    if(data.errors.length === 0){
+                        //$('#recaptchaError').hide();
                         setUndefined([phoneInput,nameInput]);
                         clearValue([phoneInput,nameInput,messageInput]);
                         
-                        grecaptcha.reset();
+                        //grecaptcha.reset();
                         $(".confirmation").show().delay(2000).fadeOut();
                         isPhoneValid = false;
                         isNameValid = false;
                     }else{
                         if(data.errors.hasOwnProperty('recaptcha_failed')){
-                            $('#recaptchaError').show();
+                            //$('#recaptchaError').show();
                         }else{
-                            grecaptcha.reset($('.g-recaptcha'),{
+/*                            grecaptcha.reset($('.g-recaptcha'),{
                                 'callback': function(response){
                                     $('#recaptchaError').hide();
                                 }
-                            });
+                            });*/
                             
                         }
                         
