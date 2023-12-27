@@ -2,7 +2,7 @@
     <section id="services" class="services section container d-flex flex-column">
         <div class="row">
             <div class="col text-center">
-                <h2 class="h1 mb-0">Услуги</h2>
+                <h2 class="h1 mb-0">{{ trans('blocks.services.title') }}</h2>
             </div>
         </div>
         <div class="loadMore">
@@ -27,13 +27,13 @@
                                     </div>
                                     <div class="property d-flex align-items-center pb-2">
                                         <i class="property__icon far fa-money-bill-alt"></i>
-                                        <span class="property__text px-2">{{ service.price }} грн.</span>
+                                        <span class="property__text px-2">{{ service.price }} ₴</span>
                                     </div>
                                 </div>
                                 <div class="properties d-flex flex-row flex-md-column">
                                     <div class="property d-flex align-items-center pb-2">
                                         <ul class="m-0">
-                                            <li><span class="property__text ">Очно или онлайн</span></li>
+                                            <li><span class="property__text ">{{ trans('blocks.services.communication_options') }}</span></li>
                                         </ul>
                                         
                                         
@@ -47,7 +47,7 @@
                     </div>
                     <div class="row pt-2">
                         <div class="col">
-                            <a class="btn btn-light " href="/appointment/{{ service.id }}/show">Узнать больше</a>
+                            <a class="btn btn-light " href="/appointment/{{ service.id }}/show">{{ trans('actions.find_out_more') }}</a>
                         </div>
                         
                     </div>

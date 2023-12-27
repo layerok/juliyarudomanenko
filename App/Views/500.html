@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}Ошибка{% endblock %}
+{% block title %}{{ trans('pages.500.meta_title') }}{% endblock %}
 
 {% block body %}
-<div class="container section">
-    <div class="row">
-        <div class="col">
-            <h1>Возникла ошибка</h1>
-            <p>Извините возникла ошибка.</p>
+    <div class="container section">
+        <div class="row">
+            <div class="col">
+                <h1>{{ trans('pages.500.title') }}</h1>
+                <p>{{ trans('pages.500.subtitle') }}</p>
+            </div>
         </div>
     </div>
-</div>
 
 
 {% endblock %}

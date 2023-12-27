@@ -1,7 +1,7 @@
 {% set page = "about"%}
 {% extends "base.html" %}
 
-{% block title %}Обо мне{% endblock %}
+{% block title %}{{ trans('pages.about.meta_title') }}{% endblock %}
 
 {% block footer%} {% endblock %}
 
@@ -9,17 +9,17 @@
     <section class="section container">
         <div class="row">
             <div class=" offset-lg-1 col-lg-2">
-                <img src="/img/profile_W161.png" alt=">Фотография Юлии Рудоманенко" class="img-fluid">
+                <img src="/img/profile_W161.png" alt="Picture of Rudomanenko Juliya" class="img-fluid">
             </div>
             <div class="col-lg-7 mt-3 mt-lg-0">
-                <h4 class="h4 mb-3">Обо мне</h4>
+                <h4 class="h4 mb-3">{{ trans('pages.about.about') }}</h4>
                 <p data-editable data-name="about_heading" data-fixture>{{ msg('about_heading') }}</p>
                 
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-lg-7 offset-lg-3">
-                <h4 class="h4 mb-4">Образование</h4>
+                <h4 class="h4 mb-4">{{ trans('pages.about.education') }}</h4>
                 <p data-editable data-name="about_subheading" data-fixture>{{ msg('about_subheading') }}</p>
             </div>
         </div>

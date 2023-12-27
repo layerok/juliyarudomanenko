@@ -2,11 +2,7 @@
 
 namespace App;
 
-/**
- * Application configuration
- *
- * PHP version 7.0
- */
+
 class Config
 {
 
@@ -58,11 +54,15 @@ class Config
      * Show or hide error messages on screen
      * @var boolean
      */
-    const SHOW_ERRORS = true;
+    const SHOW_ERRORS = false;
 
     /**
      * enable or disable production mode
      * @var boolean
      */
     const ENABLE_PRODUCTION = false;
+
+    const LOCALE = 'uk';
+
+    const FALLBACK_LOCALE = 'ru';
 }

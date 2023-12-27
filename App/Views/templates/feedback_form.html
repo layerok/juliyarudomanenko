@@ -1,0 +1,33 @@
+<form name="messageForm" id="message-form" action="/about/send#feedback" method="post" novalidate>
+    <div class="form-group">
+        <label for="name">{{ trans('forms.feedback.fields.name.label') }}:<abbr class="text-danger">*</abbr></label>
+        <input required type="text" name="name" class="form-control" id="name" placeholder="{{ trans('forms.feedback.fields.name.placeholder') }}"
+               value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
+        <div class="invalid-feedback">{{ trans('forms.feedback.fields.name.error.required') }}</div>
+        <div class="valid-feedback">{{ trans('forms.feedback.fields.name.valid') }}</div>
+    </div>
+    <div class="form-group">
+        <label for="phone">{{ trans('forms.feedback.fields.phone.label') }}:<abbr class="text-danger">*</abbr></label>
+        <input required data-validation-rule="phoneUa" type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="{{ trans('forms.feedback.fields.phone.placeholder') }}"
+               value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
+        <div class="invalid-feedback">{{ trans('forms.feedback.fields.phone.error.phoneUa') }}</div>
+        <div class="valid-feedback">{{ trans('forms.feedback.fields.phone.valid') }}</div>
+    </div>
+    <div class="form-group">
+        <label for="message">{{ trans('forms.feedback.fields.message.label') }}:</label>
+        <textarea class="form-control" name="message" id="message"
+                  placeholder="{{ trans('forms.feedback.fields.message.placeholder') }}">{% if post_data.message %}{{ post_data.message }}{% endif %}</textarea>
+    </div>
+    {#                <div class="form-group">
+                        <div class="form__recaptcha">
+                            <div class="g-recaptcha" data-sitekey="6Lcgh_oUAAAAAIPl1cgjobXZD1FJwjzY2ag_AIKk"></div>
+                            <div class="text-danger" id="recaptchaError" style="display:none">Подтвердите, что вы не
+                                робот!
+                            </div>
+                        </div>
+                    </div>#}
+    <input id="close-the-deal-btn" type="submit" name="submit" class="btn btn-light" value="{{ trans('actions.submit') }}">
+    <div class="form-group my-3">
+        <p class="confirmation text-success text-center" style="display:none">{{ trans('forms.feedback.success_message') }}</p>
+    </div>
+</form>

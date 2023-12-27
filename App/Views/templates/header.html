@@ -12,9 +12,9 @@
                 </div>
                 <div class="col-lg-5 col-md-6 ">
                     <nav class="nav h-100 pb-1 justify-content-end px-2">
-                        <a href="/certification/index" class="nav-link align-self-center text-white{% if page == 'certificate' %} active {% endif %}">Образование</a>
-                        <a href="/about/contact"         class="nav-link text-white align-self-center{% if page == 'contact' %} active {% endif %}"  >Контакты</a>
-                        <a href="/admin/login"         class="nav-link align-self-center text-white" target="_blank"><i class="fas fa-user"></i> Вход</a>
+                        <a href="/certification/index" class="nav-link align-self-center text-white{% if page == 'certificate' %} active {% endif %}">{{ trans('header.menu.education') }}</a>
+                        <a href="/about/contact"         class="nav-link text-white align-self-center{% if page == 'contact' %} active {% endif %}"  >{{ trans('header.menu.contacts') }}</a>
+                        <a href="/admin/login"         class="nav-link align-self-center text-white" target="_blank"><i class="fas fa-user"></i> {{ trans('header.menu.login') }}</a>
                     </nav>
                 </div>
                        
@@ -23,8 +23,8 @@
         
             <nav class="navbar navbar-expand-md navbar-dark px-0 px-md-2">
                 <a class="navbar-brand" href="/">
-                    <h2 class="navbar-brand__name h1 text-white">Юлия Рудоманенко</h2>
-                    <h5 class="navbar-brand__position h5">Психолог, психотерапевт. Одесса</h5>
+                    <h2 class="navbar-brand__name h1 text-white">{{ trans('header.title') }}</h2>
+                    <h5 class="navbar-brand__position h5">{{ trans('header.subtitle') }}</h5>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon "></span>
@@ -32,14 +32,14 @@
               
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <nav class="navbar-nav ml-auto ">
-                    <a class="nav-link text-white{% if page == 'home' %} active {% endif %}" href="/">Главная </a>
-                    <a class="nav-link text-white{% if page == 'online_appointment' %} active {% endif %}" href="/appointment/index">Записаться</a>
-                    <a class="nav-link text-white{% if page == 'about' %} active {% endif %}" href="/about/index">Обо мне</a>
-                    <a class="nav-link text-white{% if page == 'blog' %} active {% endif %}" href="/blog/index">Блог</a>
+                    <a class="nav-link text-white{% if page == 'home' %} active {% endif %}" href="/">{{ trans('header.menu.home') }} </a>
+                    <a class="nav-link text-white{% if page == 'online_appointment' %} active {% endif %}" href="/appointment/index">{{ trans('header.menu.services') }}</a>
+                    <a class="nav-link text-white{% if page == 'about' %} active {% endif %}" href="/about/index">{{ trans('header.menu.about') }}</a>
+                    <a class="nav-link text-white{% if page == 'blog' %} active {% endif %}" href="/blog/index">{{ trans('header.menu.blog') }}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="nav-link text-white d-md-none{% if page == 'contact' %} active {% endif %}" href="/about/contact" >Контакты</a>
-                    <a class="nav-link text-white d-md-none{% if page == 'certificate' %} active {% endif %}" href="/certification/index" >Образование</a>
-                    <a href="/admin/login" class="nav-link text-white d-md-none" target="_blank"><i class="fas fa-user"></i> Вход</a>
+                    <a class="nav-link text-white d-md-none{% if page == 'contact' %} active {% endif %}" href="/about/contact" >{{ trans('header.menu.contacts') }}</a>
+                    <a class="nav-link text-white d-md-none{% if page == 'certificate' %} active {% endif %}" href="/certification/index" >{{ trans('header.menu.education') }}</a>
+                    <a href="/admin/login" class="nav-link text-white d-md-none" target="_blank"><i class="fas fa-user"></i> {{ trans('header.menu.login') }}</a>
                   </ul>
                 </div>
               </nav>

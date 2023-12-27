@@ -3,6 +3,7 @@
 namespace Core;
 
 use App\Auth;
+use App\Config;
 use App\Flash;
 use App\Models\Message;
 use App\Models\Message as MessageModel;
@@ -23,8 +24,8 @@ class View
     /**
      * Render a view file
      *
-     * @param string $view  The view file
-     * @param array $args  Associative array of data to display in the view (optional)
+     * @param string $view The view file
+     * @param array $args Associative array of data to display in the view (optional)
      *
      * @return void
      */
@@ -44,8 +45,8 @@ class View
     /**
      * Render a view template using Twig
      *
-     * @param string $template  The template file
-     * @param array $args  Associative array of data to display in the view (optional)
+     * @param string $template The template file
+     * @param array $args Associative array of data to display in the view (optional)
      *
      * @return void
      */
@@ -59,10 +60,45 @@ class View
             ], getcwd());
             $twig = new Environment($loader);
             $twig->addFilter(new TwigFilter('html_entity_decode', 'html_entity_decode'));
-            $twig->addFunction(new TwigFunction('msg', function($name, $default = null) {
+            $twig->addFunction(new TwigFunction('msg', function ($name, $default = null) {
                 /** @var MessageModel $message */
-                $message = MessageModel::where('name', '=',$name)->first();
+                $message = MessageModel::where('name', '=', $name)->first();
                 return $message->content ?? $default;
+            }));
+
+            function data_get($data, $key)
+            {
+                $result = $data;
+
+                $parts = explode('.', $key);
+
+                foreach ($parts as $part) {
+                    if (isset($result[$part])) {
+                        $result = $result[$part];
+                    } else {
+                        return null;
+                    }
+                }
+                return $result;
+            }
+
+            $twig->addFunction(new TwigFunction('trans', function ($key) {
+
+                $paths = [
+                    dirname(__DIR__) . '/lang/' . Config::LOCALE . '.php',
+                    dirname(__DIR__) . '/lang/' . Config::FALLBACK_LOCALE . '.php',
+                ];
+
+                foreach($paths as $path) {
+                    if (file_exists($path)) {
+                        $source = require $path;
+                        if($translation = data_get($source, $key)) {
+                            return $translation;
+                        }
+                    }
+                }
+
+                return null;
             }));
             $twig->addExtension(new StringExtension());
             $twig->addGlobal('current_admin', Auth::getAdmin());

@@ -1,7 +1,7 @@
 {% set page = "online_appointment"%}
 {% extends "base.html" %}
 
-{% block title %}Спасибо{% endblock %}
+{% block title %}{{ trans('pages.thankyou.meta_title') }}{% endblock %}
 
 {% block footer%} {% endblock %}
 
@@ -10,8 +10,8 @@
         <div class="row">
             <div class="col">
                 <div class="d-flex flex-column align-items-center">
-                    <h2 class="h1">Спасибо</h2>
-                    <p>Ваша заявка обрабатывается!</p>
+                    <h2 class="h1">{{ trans('pages.thankyou.title') }}</h2>
+                    <p>{{ trans('pages.thankyou.subtitle') }}</p>
                 </div>
                 
             </div>

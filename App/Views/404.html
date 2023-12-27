@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Страница не найдена{% endblock %}
+{% block title %}{{ trans('pages.404.meta_title') }}{% endblock %}
 
 {% block body %}
 <div class="container section">
     <div class="row">
         <div class="col">
-            <h1>Страница не найдена</h1>
-            <p>Извините, этой страницы не существует.</p>
+            <h1>{{ trans('pages.404.title') }}</h1>
+            <p>{{ trans('pages.404.subtitle') }}</p>
         </div>
     </div>
 </div>

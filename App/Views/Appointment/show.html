@@ -33,7 +33,7 @@
                             <div class="properties d-flex flex-row flex-md-column">
                                 <div class="property d-flex align-items-center pb-2">
                                     <ul class="m-0">
-                                        <li><span class="property__text ">Очно или онлайн</span></li>
+                                        <li><span class="property__text ">{{ trans('blocks.services.communication_options') }}</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -43,15 +43,15 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h4 class="h4 mb-4 mt-3">Описание</h4>
+                        <h4 class="h4 mb-4 mt-3">{{ trans('pages.service.description') }}</h4>
                         <p>{{ service.description|raw}}</p>
                         
                     </div>
                 </div>
                 <div class="row pt-2">
                     <div class="col">
-                        <a class="btn btn-light " href="/appointment/{{ service.id }}/close-the-deal">Записаться</a>
-                        <a class="link ml-3" href="/appointment/index">К другим услугам</a>
+                        <a class="btn btn-light " href="/appointment/{{ service.id }}/close-the-deal">{{ trans('actions.make_appointment') }}</a>
+                        <a class="link ml-3" href="/appointment/index">{{ trans('actions.go_to_other_services') }}</a>
                     </div>
                     
                 </div>
