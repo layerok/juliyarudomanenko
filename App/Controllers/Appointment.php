@@ -115,7 +115,7 @@ class Appointment extends Controller
         $customer = Customer::findByPhone($_POST['phone']);
 
         if (!$customer) {
-            $customer = new Customer($_POST['phone']);
+            $customer = new Customer($_POST);
             $customer->save();
         }
 
@@ -124,25 +124,27 @@ class Appointment extends Controller
 
         $appointment->save();
 
-        // todo: I'll fix this nightmare, it is already 5 AM at the morning, I need some rest
-        $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
-        $telegram->send("Запись на прием", [
-            "name" => [
-                "value" => $appointment->customer->name ?? "",
-                "description" => "Имя",
-                "emoji" => "\xE2\x9C\x8F"
-            ],
-            "phone" => [
-                "value" => $appointment->customer->phone ?? "",
-                "description" => "Телефон",
-                "emoji" => "\xF0\x9F\x93\x9E"
-            ],
-            "format" => [
-                "value" => $appointment->format ?? "",
-                "description" => "Формат встречи",
-                "emoji" => "\xF0\x9F\x93\xA8"
-            ]
-        ]);
+        if (Config::ENABLE_PRODUCTION) {
+            // todo: I'll fix this nightmare, it is already 5 AM at the morning, I need some rest
+            $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
+            $telegram->send("Запись на прием", [
+                "name" => [
+                    "value" => $appointment->customer->name ?? "",
+                    "description" => "Имя",
+                    "emoji" => "\xE2\x9C\x8F"
+                ],
+                "phone" => [
+                    "value" => $appointment->customer->phone ?? "",
+                    "description" => "Телефон",
+                    "emoji" => "\xF0\x9F\x93\x9E"
+                ],
+                "format" => [
+                    "value" => $appointment->format ?? "",
+                    "description" => "Формат встречи",
+                    "emoji" => "\xF0\x9F\x93\xA8"
+                ]
+            ]);
+        }
 
         if (Request::isAjax()) {
 

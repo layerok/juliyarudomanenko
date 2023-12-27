@@ -82,24 +82,27 @@ class About extends Controller
         $message->customer()->associate($customer);
         $message->save();
 
-        $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
-        $telegram->send("Сообщение",[
-            "name" => [
-                "value" => $customer->name ?? "",
-                "description" => "Имя",
-                "emoji"=>"\xE2\x9C\x8F"
-            ],
-            "phone" => [
-                "value" => $customer->phone ?? "",
-                "description" => "Телефон",
-                "emoji"=>"\xF0\x9F\x93\x9E"
-            ],
-            "message" => [
-                "value" => $message->message ?? "",
-                "description" => "Сообщение",
-                "emoji"=>"\xF0\x9F\x93\xA8"
-            ]
-        ]);
+        if(Config::ENABLE_PRODUCTION) {
+            $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
+
+            $telegram->send("Сообщение", [
+                "name" => [
+                    "value" => $customer->name ?? "",
+                    "description" => "Имя",
+                    "emoji" => "\xE2\x9C\x8F"
+                ],
+                "phone" => [
+                    "value" => $customer->phone ?? "",
+                    "description" => "Телефон",
+                    "emoji" => "\xF0\x9F\x93\x9E"
+                ],
+                "message" => [
+                    "value" => $message->message ?? "",
+                    "description" => "Сообщение",
+                    "emoji" => "\xF0\x9F\x93\xA8"
+                ]
+            ]);
+        }
 
         echo json_encode([
             'errors' => []
