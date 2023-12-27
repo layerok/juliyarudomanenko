@@ -1,7 +1,7 @@
 {% set page = "contact" %}
 {% extends "base.html" %}
 
-{% block title %}Контакты{% endblock %}
+{% block title %}{{ trans('pages.contact.meta_title') }}{% endblock %}
 {% block head %}
 
 {% endblock %}
@@ -20,9 +20,8 @@
     <section class="section container">
         <div class="row">
             <div class="col mb-3">
-                <h1 class="h1">Главная информация</h1>
-                <p>Пожалуйста звоните мне по телефону чтобы быстро со мной связаться. Или же не стесняйтесь оставить
-                    сообщения через сайт. </p>
+                <h1 class="h1">{{ trans('pages.contact.main_information') }}</h1>
+                <p data-editable data-fixture data-name="contact_main_information">{{ msg('contact_main_information', 'Пожалуйста звоните мне по телефону чтобы быстро со мной связаться. Или же не стесняйтесь оставить сообщения через сайт.') }}</p>
                 {% if errors %}
                     <div class="p-2 border my-4">
 
@@ -37,7 +36,7 @@
 
             </div>
             <div class=" offset-md-1 col">
-                <h1 class="h3">Контактная информация</h1>
+                <h1 class="h3">{{ trans('pages.contact.secondary_information') }}</h1>
                 <ul class="mt-3 list-unstyled ">
                     <li class="mt-2"><i class="fas fa-phone"></i><a href="tel:0678300340"> +38(067)830-0340</a></li>
                     <li class="mt-2"><i class="fas fa-envelope"></i><a href="mailto:juliarud19.75@gmail.com">

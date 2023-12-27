@@ -63,6 +63,12 @@ class View
             $twig->addFunction(new TwigFunction('msg', function ($name, $default = null) {
                 /** @var MessageModel $message */
                 $message = MessageModel::where('name', '=', $name)->first();
+                if(!$message) {
+                    $model = new MessageModel();
+                    $model->name = $name;
+                    $model->content = $default;
+                    $model->save();
+                }
                 return $message->content ?? $default;
             }));
 
