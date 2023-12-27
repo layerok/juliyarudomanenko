@@ -33,17 +33,17 @@
 
                 {% endif %}
 
-                <form name="messageForm" id="message-form" action="/about/send" method="post">
+                <form name="messageForm" id="message-form" action="/about/send" method="post" novalidate>
                     <div class="form-group">
                         <label for="name">Имя:<abbr class="text-danger">*</abbr></label>
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя"
+                        <input required type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя"
                                value="{% if post_data.name %}{{ post_data.name }}{% endif %}">
                         <div class="invalid-feedback">Введите имя</div>
                         <div class="valid-feedback">Выглядит хорошо</div>
                     </div>
                     <div class="form-group">
                         <label for="phone">Телефон:<abbr class="text-danger">*</abbr></label>
-                        <input type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
+                        <input required data-validation-rule="phoneUa" type="text" name="phone" class="phone-mask form-control" id="phone" placeholder="Телефон"
                                value="{% if post_data.phone %}{{ post_data.phone }}{% endif %}">
                         <div class="invalid-feedback">Укажите верный телефон</div>
                         <div class="valid-feedback">Выглядит хорошо</div>

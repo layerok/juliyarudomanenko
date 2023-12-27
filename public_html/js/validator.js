@@ -29,20 +29,28 @@
         const validate = (data) => {
             let isValid = true;
 
-            Object.keys(providedRules).forEach(itemKey => {
+            const elementNames = Object.keys(providedRules);
+
+            for(let i = 0; i < elementNames.length; i++) {
+                const itemKey = elementNames[i];
+
                 const value = data[itemKey];
-                if(!validateSingle(itemKey, value)) {
+
+                if (!validateSingle(itemKey, value)) {
                     isValid = false;
                 }
-            })
+            }
+
+
             return isValid;
         }
 
         const validateSingle = (key, value) => {
-            let isValid = true;
             const rules = providedRules[key];
 
-            rules.forEach(ruleKey => {
+            for (let i = 0; i < rules.length; i++) {
+                const ruleKey = rules[i];
+
                 const rule = ruleDefinitions.find(rule => rule.key === ruleKey);
 
                 if (!rule) {
@@ -54,11 +62,12 @@
                 listeners.map(listener => listener(result, key, ruleKey));
 
                 if (!result) {
-                    isValid = false;
+                    return false;
                 }
-            })
+            }
 
-            return isValid;
+
+            return true;
 
         }
 

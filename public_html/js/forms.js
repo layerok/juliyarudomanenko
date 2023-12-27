@@ -1,14 +1,7 @@
 window.addEventListener('load', () => {
 
-    // todo: change color of facebook logo, it must not be green
-
     const useForm = (formSelector, options) => {
         const form = document.querySelector(formSelector);
-        const {
-            rules, onSuccess = () => {
-            }
-        } = options;
-
         if (!form) {
             console.warn(`form [${formSelector}] is not found`)
             return {
@@ -19,10 +12,32 @@ window.addEventListener('load', () => {
             }
         }
 
+        const detectRules = (domEl) => {
+            const rules = [
+                domEl.hasAttribute('required') ? 'required' : '',
+                ...(domEl.dataset.validationRule || '').split('|'),
+            ].filter(Boolean);
+
+            return [... new Set(rules)]
+        }
+
+        const formElements = [].slice.call(form.querySelectorAll(`input[type="text"], input[type="number"], textarea`))
+
+        const rules = formElements.filter((el) => {
+            return !!el.getAttribute('name')
+        }).reduce((acc, element) => ({
+            [element.getAttribute('name')]: detectRules(element),
+            ... acc,
+        }), {})
+
         const {
-            validate,
-            addListener,
-            validateSingle
+            onSuccess
+        } = options;
+
+
+
+        const {
+            validate, addListener, validateSingle
         } = window.useValidator({
             rules: rules
         })
@@ -46,8 +61,6 @@ window.addEventListener('load', () => {
             })
         }
 
-        const formElements = Object.keys(rules).map((name) => form.querySelector(`[name='${name}']`));
-
 
         formElements.forEach(el => {
             el.addEventListener('keyup', (e) => {
@@ -57,42 +70,34 @@ window.addEventListener('load', () => {
 
         const getFormData = () => {
             return formElements.reduce((acc, el) => ({
-                [el.getAttribute('name')]: el.value,
-                ... acc
+                [el.getAttribute('name')]: el.value, ... acc
             }), {});
         }
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const isValid = validate(getFormData())
+
             if (isValid) {
-                onSuccess(e);
+                onSuccess?.(e);
             }
         })
 
         return {
-            resetForm,
-            getFormData,
-            form
+            resetForm, getFormData, form
         };
     }
 
     const initMessageForm = () => {
 
         const {resetForm} = useForm('#message-form', {
-            rules: {
-                'phone': ['required', 'phoneUa'],
-                'name': ['required'],
-            },
             onSuccess: (e) => {
                 const form = e.currentTarget;
                 const formData = new FormData(e.currentTarget);
                 const url = form.getAttribute('action');
 
                 fetch(url, {
-                    method: "POST",
-                    body: formData,
-                    headers: {
+                    method: "POST", body: formData, headers: {
                         'X-Requested-With': 'XMLHttpRequest', // this header helps us detect client-side request
                     }
                 }).then(res => res.json()).then((data) => {
@@ -114,19 +119,13 @@ window.addEventListener('load', () => {
 
     const initAppointmentForm = () => {
         const {resetForm} = useForm('#appointment-form', {
-            rules: {
-                'phone': ['required', 'phoneUa'],
-                'name': ['required'],
-            },
             onSuccess: (e) => {
                 const form = e.currentTarget;
                 const formData = new FormData(form);
                 const url = form.getAttribute('action');
 
                 fetch(url, {
-                    method: "POST",
-                    body: formData,
-                    headers: {
+                    method: "POST", body: formData, headers: {
                         'X-Requested-With': 'XMLHttpRequest', // this header helps us detect client-side request
                     }
                 }).then(res => res.json()).then((data) => {
@@ -167,7 +166,10 @@ window.addEventListener('load', () => {
         }
     };
 
-    $('.phone-mask').mask('+38(0nn)-nnn-nnnn').val("+38(0");
+    if($.fn.mask) {
+        $('.phone-mask').mask('+38(0nn)-nnn-nnnn').val("+38(0");
+    }
+
 
 
 })
