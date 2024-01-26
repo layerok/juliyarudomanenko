@@ -29,7 +29,12 @@ return [
         ],
         'education' => [
             'certificates' => 'Сертификаты',
-            'meta_title' => 'Образование Юлии Рудоманенко'
+            'meta_title' => 'Образование Юлии Рудоманенко',
+            'table' => [
+                'headers' => [
+                    'title' => 'Название'
+                ]
+            ]
         ],
         'service' => [
             'description' => 'Описание'

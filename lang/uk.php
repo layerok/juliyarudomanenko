@@ -30,7 +30,12 @@ return [
         'blog_post' => [],
         'education' => [
             'certificates' => 'Сертифікати',
-            'meta_title' => 'Психолог Юлії Рудоманенко - Освіта'
+            'meta_title' => 'Психолог Юлії Рудоманенко - Освіта',
+            'table' => [
+                'headers' => [
+                    'title' => 'Назва'
+                ]
+            ]
         ],
         'service' => [
             'description' => 'Опис'
