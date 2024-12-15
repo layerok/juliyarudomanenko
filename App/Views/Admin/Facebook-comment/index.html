@@ -34,6 +34,7 @@
                 <tr>
                   <th>#</th>
                   <th>Ссылка на публикацию</th>
+                  <th>Порядок сортировки</th>
                   <th>Действия</th>
                 </tr>
               </thead>
@@ -41,7 +42,8 @@
                 {% for record in records %}
                     <tr>
                         <td>{{ loop.index + ((pages.current - 1) * pages.limit) }}</td>
-                        <td><a target="_blank" href="{{ record.attributes.link }}">{{ record.link }}</a></td>
+                        <td><a target="_blank" href={{ record.link }}>{{ record.link }}</a></td>
+                        <td>{{ record.sort }}</td>
                         <td>
                             <a href="/admin/comment/{{ record.id }}/edit" class="mr-3" >
                               <i class="fas fa-edit"></i>

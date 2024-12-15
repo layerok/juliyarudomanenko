@@ -14,7 +14,9 @@ class Home extends Controller
     {
         View::renderTemplate('Home/index.html',[
             "services" => Service::orderBy('id', 'desc')->get(),
-            "facebook_posts" => FacebookComment::orderBy('id', 'desc')->get(),
+            "facebook_posts" => FacebookComment::orderBy('sort', 'asc')
+                ->orderBy('id', 'desc')
+                ->get(),
         ]);
     }
 

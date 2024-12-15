@@ -5,7 +5,7 @@
 
 {% block footer %}
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v12.0"
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/uk_UA/sdk.js#xfbml=1&version=v12.0"
             nonce="wgfC6a4f"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"
             integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>
@@ -13,22 +13,9 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         $(document).ready(function () {
-            $('.services .loadMore').loadMoreResults({
-                displayedItems: 2,
-                showItems: 2,
-                button: {
-                    'class': 'btn btn-light',
-                    'text': '{{ trans('actions.show_more') }}'
-                },
-                tag: {
-                    name: 'div',
-                    class: 'row'
-                }
-
-            });
             $('.comments .loadMore').loadMoreResults({
-                displayedItems: 2,
-                showItems: 2,
+                displayedItems: 6,
+                showItems: 6,
                 button: {
                     'class': 'btn btn-light',
                     'text': '{{ trans('actions.show_more') }}'
@@ -54,15 +41,32 @@
                 <h1 data-editable data-name="home_heading" data-fixture class="h1 mb-4">{{ msg('home_heading') }}</h1>
                 <p data-editable data-name="home_subheading" data-fixture class="mb-4">{{ msg('home_subheading') }}</p>
 
-                <a href="#services" class="btn btn-light">
-                    {{ trans('actions.find_out_more') }}
-                </a>
             </div>
             <div class="offset-lg-1 col-lg-5 col-4 offset-4  order-1 order-lg-2 pb-5">
                 <img class="main-screen__img img-fluid" src="/img/saving_circle_w256.png" alt="saving circle">
             </div>
         </div>
     </section>
+
+
+    <section class="about section container d-flex flex-column">
+        <div class="row">
+            <div class="col">
+                <h2 class="h1 mb-4">Про мене</h2>
+            </div>
+        </div>
+        <div class="row">
+<!--            <div class=" offset-lg-1 col-lg-2">-->
+<!--                <img src="/img/profile_W161.png" alt="Picture of Rudomanenko Juliya" class="img-fluid">-->
+<!--            </div>-->
+            <div class="col-lg-7 mt-3 mt-lg-0">
+                <p data-editable data-name="about_heading" data-fixture>{{ msg('about_heading') }}</p>
+                <p data-editable data-name="about_subheading" data-fixture>{{ msg('about_subheading') }}</p>
+            </div>
+        </div>
+
+    </section>
+
 
     <!-- Услуги -->
     {% include 'templates/service.html' %}

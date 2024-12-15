@@ -1,17 +1,17 @@
 {% if services %}
     <section id="services" class="services section container d-flex flex-column">
         <div class="row">
-            <div class="col text-center">
+            <div class="col ">
                 <h2 class="h1 mb-0">{{ trans('blocks.services.title') }}</h2>
             </div>
         </div>
-        <div class="loadMore">
+
         {% for service in services %}
             <div   class="row mt-4  pb-4 border-light-bottom ">
-                <div class="col-md-3 mb-2">
-                    <img src="{{ service.image}}" alt="" class="d-none d-md-flex img-fluid">
-                </div>
-                <div class="col-md-9">
+<!--                <div class="col-md-3 mb-2">-->
+<!--                    <img src="{{ service.image}}" alt="" class="d-none d-md-flex img-fluid">-->
+<!--                </div>-->
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col">
                             <h3 class="h3 mb-2 mb-md-4">{{ service.name}}</h3>
@@ -54,6 +54,6 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
+
     </section>
 {% endif %}
