@@ -29,11 +29,20 @@ ul{
     background-color: var(--light);
 }
 :root{
-    --lighter:#75C788;
-    --light: #6ab47b;
-    --primary:#599a68;
-    --dark: #32673f;
+
+
+    --lighter: #efc3b9;
+    --light: #ecb8ab;
+    --primary: #f3a897;
+    --dark: #ed7a5d;
+
     --secondary: #bdc3c7;
+
+    /*--lighter:#75C788;*/
+    /*--light: #6ab47b;*/
+    /*--primary:#599a68;*/
+    /*--dark: #32673f;*/
+    /*--secondary: #bdc3c7;*/
 }
 a{
     color: var(--primary)
